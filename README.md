@@ -5,7 +5,7 @@ Application statique en français de préparation à la certification **1Z0-830*
 - Entraînement par thème, séries de 10, 20 ou 50 questions (limitées au nombre disponible), corrigé immédiat et révision des erreurs.
 - Examen blanc : 50 questions distinctes, 120 minutes, 34 réponses entièrement exactes pour atteindre 68 %. Répartition pédagogique entre tous les thèmes, sans prétendre reproduire les pondérations Oracle.
 - Navigation libre, questions à revoir, correction complète et bilan par thème.
-- Fiches mémo : 77 fiches en français, sommaire selon les dix thèmes officiels et les compétences complémentaires. Chaque question pointe vers sa fiche de référence, partagée entre questions si nécessaire.
+- Fiches mémo : 78 fiches en français, sommaire selon les dix thèmes officiels et les compétences complémentaires. Chaque question pointe vers sa fiche de référence, partagée entre questions si nécessaire.
 - Lecture des fiches dans un nouvel onglet avant et après réponse en entraînement, et dans le corrigé après l’examen. Les liens sont masqués pendant l’examen blanc.
 - Session et 30 derniers résultats conservés en `localStorage`, sans serveur ni synchronisation. Le chronomètre continue pendant l’absence.
 
@@ -34,7 +34,7 @@ Vérifier aussi les exemples des fiches avec le JDK 21 :
 npm run check:memos:java
 ```
 
-Ce contrôle compile et exécute les 72 fragments affichés, compile les trois descripteurs avec leurs fichiers de contexte, puis exécute les deux suites de commandes du JDK dans un dossier temporaire. Il crée notamment une petite image d’exécution avec `jlink`. Les imports communs des fragments sont consultables dans chaque fiche.
+Ce contrôle compile et exécute les 73 fragments affichés, compile les trois descripteurs avec leurs fichiers de contexte, puis exécute les deux suites de commandes du JDK dans un dossier temporaire. Il crée notamment une petite image d’exécution avec `jlink`. Les imports communs des fragments sont consultables dans chaque fiche.
 
 Le sommaire est accessible par `memo.html` ; une fiche est partageable via `memo.html?id=generiques`, par exemple. Les fiches sont statiques et ne modifient pas la progression. Elles suivent l’ordre : règle essentielle, méthode de raisonnement, exemple commenté, pièges, sources officielles.
 

@@ -942,6 +942,63 @@ export const memos = [
     }
   },
   {
+    "id": "exceptions-hierarchie",
+    "group": "exceptions",
+    "title": "Hiérarchie des exceptions : classes principales et multi-catch",
+    "rules": [
+      "Throwable est la racine des objets pouvant être levés. Ses branches Error et Exception sont distinctes : Error n’est pas une sous-classe d’Exception. RuntimeException est en revanche une sous-classe d’Exception.",
+      "Error et RuntimeException, ainsi que leurs sous-classes, sont unchecked : le compilateur n’impose pas de les intercepter ou de les déclarer. Les autres classes d’exceptions sont checked. La catégorie checked/unchecked dépend de l’héritage, pas du nom de la classe.",
+      "Un catch intercepte le type déclaré et ses sous-types. Dans un multi-catch A | B, aucun des deux types ne peut être un sous-type de l’autre : un ancêtre et son descendant ne peuvent pas figurer dans la même liste. Deux branches distinctes peuvent partager un ancêtre commun.",
+      "L’arborescence sélectionne les repères utiles aux questions sur les exceptions, les collections, la concurrence, les dates et les entrées-sorties. Chaque indentation représente un héritage direct. Les descendants héritent de la catégorie de leur branche."
+    ],
+    "hierarchy": "Throwable [racine des objets pouvant être levés]\n├── Error [unchecked]\n│   ├── AssertionError\n│   └── VirtualMachineError\n│       ├── OutOfMemoryError\n│       └── StackOverflowError\n└── Exception [checked, sauf sa branche RuntimeException]\n    ├── IOException [checked]\n    │   ├── FileNotFoundException\n    │   ├── EOFException\n    │   └── ObjectStreamException\n    │       └── NotSerializableException\n    ├── SQLException [checked]\n    ├── InterruptedException [checked]\n    ├── ExecutionException [checked]\n    └── RuntimeException [unchecked]\n        ├── NullPointerException\n        ├── ClassCastException\n        ├── ArithmeticException\n        ├── ArrayStoreException\n        ├── IllegalArgumentException\n        │   └── NumberFormatException\n        ├── IllegalStateException\n        ├── IndexOutOfBoundsException\n        │   ├── ArrayIndexOutOfBoundsException\n        │   └── StringIndexOutOfBoundsException\n        ├── UnsupportedOperationException\n        ├── NoSuchElementException\n        ├── MissingResourceException\n        └── DateTimeException\n            └── DateTimeParseException",
+    "method": [
+      "Repérer chaque type dans l’arborescence, puis remonter de sa classe vers Throwable.",
+      "Pour un multi-catch, comparer chaque paire de types : si l’un apparaît sur le chemin des ancêtres de l’autre, la déclaration est interdite.",
+      "Ne pas confondre ancêtre commun et relation ancêtre-descendant : deux classes de branches distinctes peuvent être réunies dans un multi-catch.",
+      "Pour des catch séparés, placer les types spécifiques avant les types qui les englobent. Avec des exceptions checked, vérifier aussi que le corps du try peut les lever : une paire sans lien de sous-typage ne suffit pas à valider tout un bloc try/catch."
+    ],
+    "code": "try {\n    throw new ArithmeticException(\"calcul impossible\");\n} catch (ArithmeticException | IllegalStateException e) {\n    System.out.print(\"traitée\");\n}\n// Ces deux classes sont des branches distinctes de RuntimeException.\n// En revanche : catch (RuntimeException | ArithmeticException e)\n// est interdit, car RuntimeException englobe ArithmeticException.",
+    "explanation": "Le multi-catch de l’exemple compile et affiche traitée : ArithmeticException et IllegalStateException n’héritent pas l’une de l’autre. Leur ancêtre commun RuntimeException ne les empêche pas de coexister dans le même multi-catch. Les deux dernières lignes illustrent en commentaire une combinaison interdite.",
+    "pitfalls": [
+      "Le suffixe Exception ne signifie pas checked : NumberFormatException et DateTimeParseException sont unchecked par leur héritage.",
+      "catch (Exception e) couvre RuntimeException et ses descendants, mais ne couvre pas Error. catch (Throwable e) couvre les deux branches, sans être une recommandation de capture générale.",
+      "Le caractère unchecked n’autorise pas un multi-catch ancêtre-descendant : la même interdiction s’applique à toute la hiérarchie.",
+      "Le classement checked/unchecked indique une obligation du compilateur, pas une garantie de gravité ou de récupération possible."
+    ],
+    "sources": [
+      {
+        "title": "JLS 21 : catégories d’exceptions et vérifications du compilateur",
+        "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-11.html"
+      },
+      {
+        "title": "JLS 21 : catch et multi-catch",
+        "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-14.20"
+      },
+      {
+        "title": "Hiérarchie officielle java.lang — Java 21",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/package-tree.html"
+      },
+      {
+        "title": "Hiérarchie officielle java.io — Java 21",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/package-tree.html"
+      },
+      {
+        "title": "SQLException : héritage — Java 21",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.sql/java/sql/SQLException.html"
+      }
+    ],
+    "related": [
+      "exceptions-types",
+      "exceptions-controle",
+      "exceptions-redefinition",
+      "ressources"
+    ],
+    "check": {
+      "output": "traitée"
+    }
+  },
+  {
     "id": "exceptions-types",
     "group": "exceptions",
     "title": "Exceptions checked, unchecked et exceptions personnalisées",
@@ -965,7 +1022,8 @@ export const memos = [
       }
     ],
     "related": [
-      "exceptions-controle"
+      "exceptions-controle",
+      "exceptions-hierarchie"
     ],
     "check": {
       "output": "traitée"
@@ -995,7 +1053,8 @@ export const memos = [
       }
     ],
     "related": [
-      "ressources"
+      "ressources",
+      "exceptions-hierarchie"
     ],
     "check": {
       "output": "traitement puis nettoyage"
@@ -2511,7 +2570,7 @@ export const questionMemoIds = {
   "objects-30": "polymorphisme",
   "exceptions-01": "exceptions-types",
   "exceptions-02": "exceptions-controle",
-  "exceptions-03": "exceptions-controle",
+  "exceptions-03": "exceptions-hierarchie",
   "exceptions-04": "exceptions-controle",
   "exceptions-05": "ressources",
   "exceptions-06": "ressources",
