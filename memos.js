@@ -1971,8 +1971,8 @@ export const memos = [
       "Placer la vérification ET la modification dans la même section critique. Protéger uniquement la lecture ou uniquement l’écriture laisserait une course entre les deux.",
       "Faire utiliser la même billetterie et son même verrou aux deux threads ; attendre leur terminaison avec join() avant de lire le bilan."
     ],
-    "code": "var verrou = new java.util.concurrent.locks.ReentrantLock();\nverrou.lock();\ntry {\n    System.out.print(\"protégé\");\n} finally {\n    verrou.unlock();\n}\n\n// Situation concrète : deux clients, une seule place.\nSystem.out.println();\nclass Billetterie {\n    private int places = 1;\n    private final java.util.concurrent.locks.ReentrantLock verrou\n        = new java.util.concurrent.locks.ReentrantLock();\n\n    boolean reserver() {\n        verrou.lock();\n        try {\n            // Vérifier puis modifier : une seule section critique.\n            if (places == 0) return false;\n            places--;\n            return true;\n        } finally {\n            verrou.unlock();\n        }\n    }\n}\n\nvar billetterie = new Billetterie(); // Le même objet pour les deux clients.\nboolean[] reservations = new boolean[2];\nThread clientA = new Thread(() -> reservations[0] = billetterie.reserver());\nThread clientB = new Thread(() -> reservations[1] = billetterie.reserver());\nclientA.start();\nclientB.start();\nclientA.join();\nclientB.join();\n\nint succes = (reservations[0] ? 1 : 0) + (reservations[1] ? 1 : 0);\nSystem.out.print(\"Réservations confirmées : \" + succes); // Toujours 1.\n// Variante simple : une méthode synchronized boolean reserver()\n// avec le même corps de vérification/modification, sans lock()/unlock().",
-    "explanation": "Le verrou est libéré même si le corps du try se termine exceptionnellement. Le second exemple ajoute deux threads clients sur la même billetterie. Celui qui acquiert le verrou en premier réserve la place ; l’autre doit acquérir ce même verrou avant de vérifier la disponibilité et constate alors qu’il ne reste aucune place. L’identité du gagnant dépend de l’ordonnancement, mais le total est toujours une réservation. Les deux start() rendent les threads susceptibles de progresser concurremment ; ils ne garantissent pas une exécution simultanée. join() attend leur fin avant le bilan. synchronized sur la méthode d’instance protégerait ici la même opération via le moniteur de la billetterie. Sortie complète : « protégé », puis « Réservations confirmées : 1 » sur la ligne suivante.",
+    "code": "var verrou = new java.util.concurrent.locks.ReentrantLock();\nverrou.lock();\ntry {\n    System.out.print(\"protégé\");\n} finally {\n    verrou.unlock();\n}",
+    "explanation": "Le verrou est libéré même si le corps du try se termine exceptionnellement. Sortie : « protégé ».",
     "pitfalls": [
       "Deux instances différentes n’ont pas le même moniteur d’instance.",
       "Un ReentrantLock n’est pas libéré automatiquement en quittant une méthode.",
@@ -1998,8 +1998,19 @@ export const memos = [
       "visibilite"
     ],
     "check": {
-      "output": "protégé\nRéservations confirmées : 1"
-    }
+      "output": "protégé"
+    },
+    "exampleTitle": "Acquérir et libérer un verrou",
+    "additionalExamples": [
+      {
+        "title": "Protéger la dernière place avec deux threads",
+        "code": "// Situation concrète : deux clients, une seule place.\nclass Billetterie {\n    private int places = 1;\n    private final java.util.concurrent.locks.ReentrantLock verrou\n        = new java.util.concurrent.locks.ReentrantLock();\n\n    boolean reserver() {\n        verrou.lock();\n        try {\n            // Vérifier puis modifier : une seule section critique.\n            if (places == 0) return false;\n            places--;\n            return true;\n        } finally {\n            verrou.unlock();\n        }\n    }\n}\n\nvar billetterie = new Billetterie(); // Le même objet pour les deux clients.\nboolean[] reservations = new boolean[2];\nThread clientA = new Thread(() -> reservations[0] = billetterie.reserver());\nThread clientB = new Thread(() -> reservations[1] = billetterie.reserver());\nclientA.start();\nclientB.start();\nclientA.join();\nclientB.join();\n\nint succes = (reservations[0] ? 1 : 0) + (reservations[1] ? 1 : 0);\nSystem.out.print(\"Réservations confirmées : \" + succes); // Toujours 1.\n// Variante simple : une méthode synchronized boolean reserver()\n// avec le même corps de vérification/modification, sans lock()/unlock().",
+        "explanation": "Cet exemple utilise deux threads clients sur la même billetterie. Celui qui acquiert le verrou en premier réserve la place ; l’autre doit acquérir ce même verrou avant de vérifier la disponibilité et constate alors qu’il ne reste aucune place. L’identité du gagnant dépend de l’ordonnancement, mais le total est toujours une réservation. Les deux start() rendent les threads susceptibles de progresser concurremment ; ils ne garantissent pas une exécution simultanée. join() attend leur fin avant le bilan. synchronized sur la méthode d’instance protégerait ici la même opération via le moniteur de la billetterie. Sortie : « Réservations confirmées : 1 ».",
+        "check": {
+          "output": "Réservations confirmées : 1"
+        }
+      }
+    ]
   },
   {
     "id": "visibilite",

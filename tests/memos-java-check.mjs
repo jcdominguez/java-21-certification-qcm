@@ -13,7 +13,8 @@ function run(command, args, cwd = dir, timeout = 30000) {
 }
 assert.match(run('javac', ['-version']).trim(), /^javac 21\./, 'Utiliser le JDK 21 pour cette vérification.');
 const imports = 'import java.util.*; import java.util.stream.*; import java.util.concurrent.*; import java.util.concurrent.atomic.*; import java.time.*; import java.time.format.*; import java.nio.file.*; import java.text.*;';
-const executable = memos.filter(m => m.check && m.check.kind !== 'module');
+const examples = memos.flatMap(m => [m, ...(m.additionalExamples || []).map((example, i) => ({...example, id: `${m.id}-exemple-${i + 2}`}))]);
+const executable = examples.filter(m => m.check && m.check.kind !== 'module');
 const name = memo => 'Memo_' + memo.id.replaceAll('-', '_');
 const files = executable.map(m => {
   const file = join(dir, name(m) + '.java');
@@ -44,4 +45,4 @@ assert.equal(run('/bin/sh', ['-eu', '-c', compilation.code]), 'Bonjour');
 const tools = memos.find(m => m.id === 'modules-outils');
 assert.equal(run('/bin/sh', ['-eu', '-c', tools.code], dir, 60000).trim(), 'java.base');
 assert.match(run(join(dir, 'runtime-minimal/bin/java'), ['--list-modules']), /^java\.base@21\./);
-console.log(`${memos.length} exemples vérifiés : ${executable.length} fragments, 3 descripteurs et 2 suites de commandes JDK 21.\nSources temporaires : ${dir}`);
+console.log(`${memos.length} fiches vérifiées : ${executable.length} fragments, 3 descripteurs et 2 suites de commandes JDK 21.\nSources temporaires : ${dir}`);
