@@ -2,9 +2,19 @@ import {questions, topics} from './bank.js';
 export const VERSION=1;
 export function shuffle(xs, random=Math.random){const a=[...xs];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 export function isCorrect(q,answer=[]){const keys=q.options.filter(o=>o.correct).map(o=>o.id);return answer.length===keys.length && new Set(answer).size===keys.length && keys.every(k=>answer.includes(k));}
-export function selectQuestions({mode,themeIds=topics.map(t=>t.id),count=20,errors=null},random=Math.random){
- if(mode==='exam') return shuffle(topics.flatMap(t=>shuffle(questions.filter(q=>q.topic===t.id),random).slice(0,t.exam)),random);
- const pool=questions.filter(q=>themeIds.includes(q.topic)&&(!errors||errors.includes(q.id)));
+export function selectQuestions({mode,themeIds=topics.map(t=>t.id),count=20,errors=null,treated=[]},random=Math.random){
+ const done = new Set(treated);
+ if(mode==='exam') {
+  // Conserver les quotas de l’examen, en épuisant les inédites de chaque thème d’abord.
+  return shuffle(topics.flatMap(t=>{
+   const pool=questions.filter(q=>q.topic===t.id);
+   const fresh=shuffle(pool.filter(q=>!done.has(q.id)),random);
+   const previous=shuffle(pool.filter(q=>done.has(q.id)),random);
+   return [...fresh,...previous].slice(0,t.exam);
+  }),random);
+ }
+ // La révision des erreurs est volontaire : elle peut reprendre une question traitée.
+ const pool=questions.filter(q=>themeIds.includes(q.topic)&&(errors ? errors.includes(q.id) : !done.has(q.id)));
  return shuffle(pool,random).slice(0,count);
 }
 export function newSession(selected,mode,now=Date.now()) {return {version:VERSION,id:globalThis.crypto.randomUUID(),mode,ids:selected.map(q=>q.id),answers:{},validated:[],flags:[],index:0,startedAt:now,deadline:mode==='exam'?now+120*60*1000:null,finishedAt:null};}

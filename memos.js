@@ -1,3 +1,4 @@
+import {additionalQuestions} from './additional-questions.js';
 // Catalogue de révision Java SE 21. Textes et exemples originaux.
 export const memoGroups = [
   {
@@ -1958,7 +1959,7 @@ export const memos = [
     "group": "concurrency",
     "title": "synchronized et verrous explicites",
     "rules": [
-      "Une méthode synchronized d’instance utilise le moniteur de l’instance ; static synchronized utilise l’objet Class déclarant la méthode. Un ReentrantLock nécessite une libération explicite assurée par finally.",
+      "Une méthode synchronized d’instance utilise le moniteur de l’instance ; static synchronized utilise l’objet Class déclarant la méthode. Un ReentrantLock nécessite une libération explicite assurée par finally. Il est réentrant : le même thread peut l’acquérir plusieurs fois ; getHoldCount() indique le nombre d’acquisitions encore détenues par le thread courant et chaque acquisition exige un unlock().",
       "Quand plusieurs threads partagent une donnée modifiable, un verrou permet de protéger les opérations qui doivent rester indivisibles : c’est la section critique. Exemple : vérifier qu’une place est disponible puis la réserver. Tous les accès concurrents concernés doivent respecter le même verrou.",
       "Sans verrou, deux threads peuvent chacun lire « 1 place disponible », puis chacun confirmer sa réservation : deux réservations pour une seule place. Ce déroulement est possible, mais ne se produit pas forcément à chaque exécution.",
       "Les threads d’un même processus Java partagent des objets. Un ReentrantLock coordonne les threads qui utilisent cette même instance de verrou ; il ne coordonne pas deux programmes Java lancés dans des processus distincts.",
@@ -2329,11 +2330,13 @@ export const memos = [
     "group": "locale",
     "title": "Nombres, devises et pourcentages : formatage et parsing",
     "rules": [
-      "NumberFormat applique les conventions d’une locale. Le format pourcentage affiche une fraction multipliée par 100. Un format monétaire présente une valeur dans une devise, sans calculer un taux de change."
+      "NumberFormat applique les conventions d’une locale. Le format pourcentage affiche une fraction multipliée par 100. Un format monétaire présente une valeur dans une devise, sans calculer un taux de change.",
+      "Le format pourcentage standard de Locale.US n’affiche par défaut aucune décimale. L’affichage est donc arrondi selon les paramètres du format ; NumberFormat utilise par défaut RoundingMode.HALF_EVEN pour les arrondis : à égalité exacte, le dernier chiffre conservé est pair. Les bornes de décimales se consultent avec getMinimumFractionDigits() et getMaximumFractionDigits() et peuvent être configurées."
     ],
     "method": [
       "Identifier la locale et le type de format demandé.",
-      "Distinguer valeur numérique, représentation affichée et résultat de parse."
+      "Distinguer valeur numérique, représentation affichée et résultat de parse.",
+      "Vérifier les décimales affichées et la règle d’arrondi avant de déduire le texte d’un pourcentage non entier."
     ],
     "code": "var format = NumberFormat.getPercentInstance(Locale.US);\nSystem.out.print(format.format(0.4) + \":\" + format.parse(\"40%\").doubleValue());",
     "explanation": "La fraction 0.4 s’affiche 40% ; le parsing du pourcentage retrouve 0.4.",
@@ -2693,3 +2696,11 @@ export const questionMemoIds = {
   "locale-07": "format-dates",
   "locale-08": "format-nombres"
 };
+
+// Affectation explicite de la fiche de chaque nouvelle question.
+for (const topic of new Set(additionalQuestions.map(q => q.topic))) {
+  const existing = Object.keys(questionMemoIds).filter(id => id.startsWith(topic + "-")).length;
+  additionalQuestions.filter(q => q.topic === topic).forEach((q, i) => {
+    questionMemoIds[`${topic}-${String(existing + i + 1).padStart(2, "0")}`] = q.memoId;
+  });
+}
