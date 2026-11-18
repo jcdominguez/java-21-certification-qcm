@@ -1958,29 +1958,47 @@ export const memos = [
     "group": "concurrency",
     "title": "synchronized et verrous explicites",
     "rules": [
-      "Une méthode synchronized d’instance utilise le moniteur de l’instance ; static synchronized utilise l’objet Class déclarant la méthode. Un ReentrantLock nécessite une libération explicite assurée par finally."
+      "Une méthode synchronized d’instance utilise le moniteur de l’instance ; static synchronized utilise l’objet Class déclarant la méthode. Un ReentrantLock nécessite une libération explicite assurée par finally.",
+      "Quand plusieurs threads partagent une donnée modifiable, un verrou permet de protéger les opérations qui doivent rester indivisibles : c’est la section critique. Exemple : vérifier qu’une place est disponible puis la réserver. Tous les accès concurrents concernés doivent respecter le même verrou.",
+      "Sans verrou, deux threads peuvent chacun lire « 1 place disponible », puis chacun confirmer sa réservation : deux réservations pour une seule place. Ce déroulement est possible, mais ne se produit pas forcément à chaque exécution.",
+      "Les threads d’un même processus Java partagent des objets. Un ReentrantLock coordonne les threads qui utilisent cette même instance de verrou ; il ne coordonne pas deux programmes Java lancés dans des processus distincts.",
+      "Pour une section critique simple, synchronized suffit et libère automatiquement le moniteur en sortie de bloc. Un verrou explicite permet notamment tryLock() pour essayer sans attendre, ou une acquisition avec délai maximal. Il n’est pas nécessaire de créer un ReentrantLock pour chaque accès à une variable."
     ],
     "method": [
       "Identifier le verrou exact partagé par les tâches.",
-      "Vérifier que toutes les opérations sur l’invariant utilisent le même verrou."
+      "Vérifier que toutes les opérations sur l’invariant utilisent le même verrou.",
+      "Repérer la donnée partagée et la règle à préserver : ici, une seule réservation peut réussir pour la dernière place.",
+      "Placer la vérification ET la modification dans la même section critique. Protéger uniquement la lecture ou uniquement l’écriture laisserait une course entre les deux.",
+      "Faire utiliser la même billetterie et son même verrou aux deux threads ; attendre leur terminaison avec join() avant de lire le bilan."
     ],
-    "code": "var verrou = new java.util.concurrent.locks.ReentrantLock();\nverrou.lock();\ntry {\n    System.out.print(\"protégé\");\n} finally {\n    verrou.unlock();\n}",
-    "explanation": "Le verrou est libéré même si le corps du try se termine exceptionnellement.",
+    "code": "var verrou = new java.util.concurrent.locks.ReentrantLock();\nverrou.lock();\ntry {\n    System.out.print(\"protégé\");\n} finally {\n    verrou.unlock();\n}\n\n// Situation concrète : deux clients, une seule place.\nSystem.out.println();\nclass Billetterie {\n    private int places = 1;\n    private final java.util.concurrent.locks.ReentrantLock verrou\n        = new java.util.concurrent.locks.ReentrantLock();\n\n    boolean reserver() {\n        verrou.lock();\n        try {\n            // Vérifier puis modifier : une seule section critique.\n            if (places == 0) return false;\n            places--;\n            return true;\n        } finally {\n            verrou.unlock();\n        }\n    }\n}\n\nvar billetterie = new Billetterie(); // Le même objet pour les deux clients.\nboolean[] reservations = new boolean[2];\nThread clientA = new Thread(() -> reservations[0] = billetterie.reserver());\nThread clientB = new Thread(() -> reservations[1] = billetterie.reserver());\nclientA.start();\nclientB.start();\nclientA.join();\nclientB.join();\n\nint succes = (reservations[0] ? 1 : 0) + (reservations[1] ? 1 : 0);\nSystem.out.print(\"Réservations confirmées : \" + succes); // Toujours 1.\n// Variante simple : une méthode synchronized boolean reserver()\n// avec le même corps de vérification/modification, sans lock()/unlock().",
+    "explanation": "Le verrou est libéré même si le corps du try se termine exceptionnellement. Le second exemple ajoute deux threads clients sur la même billetterie. Celui qui acquiert le verrou en premier réserve la place ; l’autre doit acquérir ce même verrou avant de vérifier la disponibilité et constate alors qu’il ne reste aucune place. L’identité du gagnant dépend de l’ordonnancement, mais le total est toujours une réservation. Les deux start() rendent les threads susceptibles de progresser concurremment ; ils ne garantissent pas une exécution simultanée. join() attend leur fin avant le bilan. synchronized sur la méthode d’instance protégerait ici la même opération via le moniteur de la billetterie. Sortie complète : « protégé », puis « Réservations confirmées : 1 » sur la ligne suivante.",
     "pitfalls": [
       "Deux instances différentes n’ont pas le même moniteur d’instance.",
-      "Un ReentrantLock n’est pas libéré automatiquement en quittant une méthode."
+      "Un ReentrantLock n’est pas libéré automatiquement en quittant une méthode.",
+      "Créer un verrou distinct pour chaque client ne protège pas la billetterie commune : les deux threads pourraient entrer dans leur section critique en même temps.",
+      "Tester une seule fois le code sans verrou et obtenir une seule réservation ne prouve pas son absence de course.",
+      "Dormir avec Thread.sleep() ne remplace pas une synchronisation ; l’ordre d’exécution des clients n’est pas garanti."
     ],
     "sources": [
       {
         "title": "Documentation officielle Java SE 21",
         "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/ReentrantLock.html"
+      },
+      {
+        "title": "Lock : ressource partagée, try/finally et acquisitions avec ou sans attente",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/locks/Lock.html"
+      },
+      {
+        "title": "JLS 21 — Instructions synchronized",
+        "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-14.19"
       }
     ],
     "related": [
       "visibilite"
     ],
     "check": {
-      "output": "protégé"
+      "output": "protégé\nRéservations confirmées : 1"
     }
   },
   {
