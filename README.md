@@ -5,7 +5,7 @@ Application statique en français de préparation à la certification **1Z0-830*
 - Entraînement par thème, séries de 10, 20 ou 50 questions (limitées aux questions non traitées disponibles), corrigé immédiat et révision volontaire des erreurs. Une question devient traitée après validation ou remise d’une réponse en fin de session ; une simple consultation ne suffit pas.
 - Examen blanc : 50 questions distinctes, 120 minutes, 34 réponses entièrement exactes pour atteindre 68 %. Priorité aux questions non traitées dans chaque thème ; si un quota ne peut être rempli, confirmation du nombre de questions déjà traitées avant le lancement. Répartition pédagogique entre tous les thèmes, sans prétendre reproduire les pondérations Oracle.
 - Navigation libre, questions à revoir, correction complète et bilan par thème.
-- Fiches mémo : 78 fiches en français, sommaire selon les dix thèmes officiels et les compétences complémentaires. Chaque question pointe vers sa fiche de référence, partagée entre questions si nécessaire.
+- Fiches mémo : 79 fiches en français, sommaire selon les dix thèmes officiels et les compétences complémentaires. Chaque question pointe vers sa fiche de référence, partagée entre questions si nécessaire.
 - Lecture des fiches dans un nouvel onglet avant et après réponse en entraînement, et dans le corrigé après l’examen. Les liens sont masqués pendant l’examen blanc.
 - Session, trente derniers résultats et suivi des questions traitées conservés en `localStorage`, sans serveur ni synchronisation. Le suivi survit à la sortie d’un bilan de l’historique. Les sauvegardes antérieures récupèrent les questions identifiables dans les bilans restants, la session et les erreurs ; les anciens bilans déjà supprimés ne sont pas récupérables. Quand les thèmes sélectionnés sont épuisés, une confirmation permet de recommencer un cycle pour ces thèmes en conservant les bilans et les erreurs. Effacer la progression supprime également ce suivi. Le chronomètre continue pendant l’absence.
 
@@ -34,7 +34,7 @@ Vérifier aussi les exemples des fiches avec le JDK 21 :
 npm run check:memos:java
 ```
 
-Ce contrôle compile et exécute les 74 fragments affichés, compile les trois descripteurs avec leurs fichiers de contexte, puis exécute les deux suites de commandes du JDK dans un dossier temporaire. Il crée notamment une petite image d’exécution avec `jlink`. Les imports communs des fragments sont consultables dans chaque fiche.
+Ce contrôle compile et exécute les 74 fragments affichés, compile les quatre descripteurs avec leurs fichiers de contexte, puis exécute les deux suites de commandes du JDK dans un dossier temporaire. Il crée notamment une petite image d’exécution avec `jlink`. Les imports communs des fragments sont consultables dans chaque fiche.
 
 Le sommaire est accessible par `memo.html` ; une fiche est partageable via `memo.html?id=generiques`, par exemple. Les fiches sont statiques et ne modifient pas la progression. Elles suivent l’ordre : règle essentielle, méthode de raisonnement, exemple commenté, pièges, sources officielles.
 

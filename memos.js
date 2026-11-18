@@ -1668,6 +1668,47 @@ export const memos = [
     }
   },
   {
+    "id": "modules-lire-module-info",
+    "group": "modules",
+    "title": "Lire et remplir module-info.java",
+    "rules": [
+      "module-info.java se place à la racine des sources du module. Il commence par module suivi du nom du module, puis liste ses directives entre accolades.",
+      "Les directives forment trois familles : requires pour ce dont le module a besoin, exports et opens pour ce qu’il montre, uses et provides pour les services qu’il consomme ou fournit.",
+      "Sans aucune directive, un module ne requiert que java.base, implicitement, et ne montre aucun package."
+    ],
+    "method": [
+      "Pour lire, regarder ce qui suit chaque directive : un nom de module après requires, un nom de package après exports et opens, un nom de type après uses et provides.",
+      "Pour remplir, répondre dans l’ordre à trois questions : de quels modules le code a-t-il besoin ? Quels packages les autres modules doivent-ils utiliser, normalement ou par réflexion ? Quels services le module consomme-t-il ou fournit-il ?",
+      "N’ajouter un mot-clé que pour une raison précise : transitive pour transmettre la dépendance aux modules consommateurs, static pour une dépendance obligatoire à la compilation mais facultative à l’exécution, to pour réserver un export ou une ouverture à des modules nommés."
+    ],
+    "code": "// 1. Le nom du module\nmodule boutique {\n\n    // 2. Ce dont le module a besoin\n    requires java.logging;\n    requires transitive java.sql;\n    requires static java.desktop;\n\n    // 3. Ce que le module montre\n    exports boutique.api;\n    opens boutique.modele;\n\n    // 4. Les services consommés et fournis\n    uses boutique.api.Paiement;\n    provides boutique.api.Paiement with boutique.modele.PaiementCarte;\n}",
+    "explanation": "Le module boutique requiert java.logging. Il requiert aussi java.sql et le transmet aux modules qui le lisent ; java.desktop n’est requis que pour la compilation. Le package boutique.api est exporté ; boutique.modele est ouvert à la réflexion sans être exporté. Le module consomme le service Paiement et en fournit une implémentation, PaiementCarte. Les packages et types cités doivent exister dans le module pour que ce descripteur compile.",
+    "pitfalls": [
+      "Il n’existe pas de joker : exports boutique.*; est refusé à la compilation (<identifier> expected). Chaque package s’exporte par sa propre ligne.",
+      "Exporter un package absent du module fait échouer la compilation (package is empty or does not exist).",
+      "L’ordre des directives n’est pas imposé : les regrouper par famille est une convention de lecture, pas une règle du langage."
+    ],
+    "sources": [
+      {
+        "title": "Spécification du langage Java SE 21, §7.7 Module Declarations",
+        "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-7.html#jls-7.7"
+      }
+    ],
+    "related": [
+      "modules-descripteur",
+      "modules-acces",
+      "modules-services"
+    ],
+    "check": {
+      "kind": "module",
+      "files": {
+        "module-info.java": "// 1. Le nom du module\nmodule boutique {\n\n    // 2. Ce dont le module a besoin\n    requires java.logging;\n    requires transitive java.sql;\n    requires static java.desktop;\n\n    // 3. Ce que le module montre\n    exports boutique.api;\n    opens boutique.modele;\n\n    // 4. Les services consommés et fournis\n    uses boutique.api.Paiement;\n    provides boutique.api.Paiement with boutique.modele.PaiementCarte;\n}",
+        "boutique/api/Paiement.java": "package boutique.api; public interface Paiement {}",
+        "boutique/modele/PaiementCarte.java": "package boutique.modele; public class PaiementCarte implements boutique.api.Paiement { public PaiementCarte() {} }"
+      }
+    }
+  },
+  {
     "id": "modules-descripteur",
     "group": "modules",
     "title": "Descripteur de module et dépendances requires",
@@ -1740,6 +1781,8 @@ export const memos = [
     "group": "modules",
     "title": "Services : uses, provides et ServiceLoader",
     "rules": [
+      "Un service permet à un module d’utiliser une fonctionnalité sans dépendre du module qui la fournit. Il fait intervenir trois rôles : le contrat, un type (souvent une interface) ; le fournisseur, qui en livre une implémentation ; le consommateur, qui demande à ServiceLoader les implémentations disponibles.",
+      "Le consommateur ne déclare aucun requires vers les fournisseurs. Ajouter un fournisseur revient à placer un module de plus sur le module path, sans modifier ni recompiler le consommateur.",
       "Le consommateur déclare uses avec le type du service. Le fournisseur déclare provides … with … avec son implémentation. ServiceLoader découvre les fournisseurs selon les règles des modules et du chargement."
     ],
     "method": [
@@ -1750,7 +1793,8 @@ export const memos = [
     "explanation": "Ce module est à la fois consommateur et fournisseur. Le service et sa classe d’implémentation sont définis dans les packages indiqués ; le fournisseur possède ici un constructeur public sans argument.",
     "pitfalls": [
       "exports ne déclare pas un fournisseur.",
-      "ServiceLoader ne compile pas une implémentation manquante."
+      "ServiceLoader ne compile pas une implémentation manquante.",
+      "Oublier uses dans le consommateur ne bloque pas la compilation : l’erreur survient à l’exécution, à l’appel de ServiceLoader (ServiceConfigurationError … does not declare `uses`)."
     ],
     "sources": [
       {

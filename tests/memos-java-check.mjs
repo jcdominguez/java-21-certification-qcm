@@ -45,4 +45,4 @@ assert.equal(run('/bin/sh', ['-eu', '-c', compilation.code]), 'Bonjour');
 const tools = memos.find(m => m.id === 'modules-outils');
 assert.equal(run('/bin/sh', ['-eu', '-c', tools.code], dir, 60000).trim(), 'java.base');
 assert.match(run(join(dir, 'runtime-minimal/bin/java'), ['--list-modules']), /^java\.base@21\./);
-console.log(`${memos.length} fiches vérifiées : ${executable.length} fragments, 3 descripteurs et 2 suites de commandes JDK 21.\nSources temporaires : ${dir}`);
+console.log(`${memos.length} fiches vérifiées : ${executable.length} fragments, ${memos.filter(m => m.check?.kind === 'module').length} descripteurs et 2 suites de commandes JDK 21.\nSources temporaires : ${dir}`);
