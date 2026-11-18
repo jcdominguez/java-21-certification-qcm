@@ -2435,6 +2435,33 @@ export const memos = [
     "id": "generiques",
     "group": "extra",
     "title": "Génériques : paramètres de type, invariance et wildcards",
+    "cheatsheet": {
+      "title": "Anti-sèche : wildcards",
+      "head": [
+        "Ce que fait ma méthode",
+        "Paramètre"
+      ],
+      "rows": [
+        [
+          "Je prends un T dans la liste",
+          "List<? extends T>"
+        ],
+        [
+          "Je dépose un T dans la liste",
+          "List<? super T>"
+        ],
+        [
+          "Je prends et je dépose des T dans la même liste",
+          "List<T>"
+        ]
+      ],
+      "legend": "✓ indique les types X pour lesquels je peux passer une List<X> à la méthode.",
+      "diagram": "JE PRENDS UN Number           JE DÉPOSE UN Number\nList<? extends Number>        List<? super Number>\n\nObject                        Object ✓\n└── Number ✓                  └── Number ✓\n    ├── Integer ✓                 ├── Integer\n    └── Double  ✓                 └── Double",
+      "notes": [
+        "extends ↓ Depuis Number, je descends. Dans une List<Integer> ou une List<Double>, tout élément peut être lu comme un Number.",
+        "super ↑ Depuis Number, je remonte. Une List<Number> ou une List<Object> peut recevoir aussi bien 42 que 3.14."
+      ]
+    },
     "rules": [
       "List<Integer> n’est pas un sous-type de List<Number>. Avec ? extends Number, la lecture garantit Number, mais pas l’ajout d’un nombre arbitraire. Avec ? super Integer, on peut ajouter Integer, mais une lecture ne garantit que Object."
     ],
