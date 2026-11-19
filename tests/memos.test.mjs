@@ -33,6 +33,11 @@ test('fiches complètes, sources officielles Java 21 et renvois valides', () => 
     assert.equal(new Set(m.related).size, m.related.length);
     for (const id of m.related) assert.ok(id !== m.id && memos.some(other => other.id === id), `${m.id} -> ${id}`);
     assert.ok(m.language === 'sh' || m.check, `${m.id}: exemple vérifiable`);
+    for (const t of m.tables || []) {
+      assert.ok(t.title?.trim() && t.head.length && t.rows.length, `${m.id}: tableau`);
+      for (const row of t.rows) assert.equal(row.length, t.head.length, `${m.id}: ${t.title}`);
+      for (const i of t.codeColumns || []) assert.ok(i >= 0 && i < t.head.length, `${m.id}: ${t.title}`);
+    }
   }
 });
 

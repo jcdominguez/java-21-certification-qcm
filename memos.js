@@ -2594,6 +2594,28 @@ export const memos = [
       "Le format pourcentage standard de Locale.US n’affiche par défaut aucune décimale. L’affichage est donc arrondi selon les paramètres du format ; NumberFormat utilise par défaut RoundingMode.HALF_EVEN pour les arrondis : à égalité exacte, le dernier chiffre conservé est pair.",
       "Les bornes de décimales se consultent avec getMinimumFractionDigits() et getMaximumFractionDigits() et peuvent être configurées."
     ],
+    "tables": [
+      {
+        "title": "Les deux bornes de décimales",
+        "head": ["Borne", "Lecture et modification", "Effet sur l’affichage"],
+        "rows": [
+          ["Minimum", "getMinimumFractionDigits()\nsetMinimumFractionDigits(n)", "Complète avec des zéros si la valeur a moins de décimales."],
+          ["Maximum", "getMaximumFractionDigits()\nsetMaximumFractionDigits(n)", "Arrondit si la valeur a plus de décimales (HALF_EVEN par défaut)."]
+        ],
+        "codeColumns": [1]
+      },
+      {
+        "title": "Bornes par défaut avec Locale.US",
+        "head": ["Format", "Min", "Max", "Exemple"],
+        "rows": [
+          ["getPercentInstance()", "0", "0", "0.256 → 26%"],
+          ["getNumberInstance()", "0", "3", "2.123456 → 2.123"],
+          ["getCurrencyInstance()", "2", "2", "3.5 → $3.50"]
+        ],
+        "codeColumns": [0, 3],
+        "note": "Le format pourcentage a les mêmes bornes dans les autres locales. Pour une monnaie, les bornes suivent la devise : 0 et 0 pour le yen avec Locale.JAPAN."
+      }
+    ],
     "method": [
       "Identifier la locale et le type de format demandé.",
       "Distinguer valeur numérique, représentation affichée et résultat de parse.",

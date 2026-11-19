@@ -4,6 +4,8 @@ const main = document.querySelector('main');
 const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[c]));
 const href = memo => `memo.html?id=${encodeURIComponent(memo.id)}`;
 const list = (items, ordered = false) => `<${ordered ? 'ol' : 'ul'}>${items.map(text => `<li>${esc(text)}</li>`).join('')}</${ordered ? 'ol' : 'ul'}>`;
+// Tableaux libres sous la règle essentielle ; codeColumns liste les colonnes affichées en code.
+const tables = (items = []) => items.map(t => `<figure class="memo-table"><figcaption>${esc(t.title)}</figcaption><div class="memo-table-scroll" tabindex="0" role="region" aria-label="${esc(t.title)}"><table><thead><tr>${t.head.map(h => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${t.rows.map(row => `<tr>${row.map((text, i) => `<td>${t.codeColumns?.includes(i) ? `<code>${esc(text)}</code>` : esc(text)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>${t.note ? `<p>${esc(t.note)}</p>` : ''}</figure>`).join('');
 const params = new URLSearchParams(location.search);
 
 function renderIndex() {
@@ -35,7 +37,7 @@ function renderMemo(id) {
   main.innerHTML = `<nav class="session-bar" aria-label="Navigation de la fiche"><a href="memo.html#theme-${group.id}">← Sommaire des fiches mémo</a><a href="./">Retour au QCM</a></nav>
     <article class="card memo-sheet"><p class="eyebrow">${esc(group.name)}</p><h1>${esc(memo.title)}</h1>
       ${memo.cheatsheet ? `<aside class="memo-cheatsheet" aria-labelledby="cheatsheet"><h2 id="cheatsheet">${esc(memo.cheatsheet.title)}</h2><table><thead><tr>${memo.cheatsheet.head.map(h => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${memo.cheatsheet.rows.map(([action, param]) => `<tr><td>${esc(action)}</td><td><code>${esc(param)}</code></td></tr>`).join('')}</tbody></table><p>${esc(memo.cheatsheet.legend)}</p><pre tabindex="0" aria-label="Types acceptés par extends et par super, à partir de Number"><code>${esc(memo.cheatsheet.diagram)}</code></pre>${list(memo.cheatsheet.notes)}</aside>` : ''}
-      <section aria-labelledby="rule"><h2 id="rule">Règle essentielle</h2>${list(memo.rules)}${memo.hierarchy ? `<figure class="memo-hierarchy"><figcaption>Arborescence des principales classes</figcaption><pre tabindex="0" aria-label="Hiérarchie des exceptions, de la superclasse vers ses sous-classes"><code>${esc(memo.hierarchy)}</code></pre></figure>` : ''}</section>
+      <section aria-labelledby="rule"><h2 id="rule">Règle essentielle</h2>${list(memo.rules)}${tables(memo.tables)}${memo.hierarchy ? `<figure class="memo-hierarchy"><figcaption>Arborescence des principales classes</figcaption><pre tabindex="0" aria-label="Hiérarchie des exceptions, de la superclasse vers ses sous-classes"><code>${esc(memo.hierarchy)}</code></pre></figure>` : ''}</section>
       <section aria-labelledby="method"><h2 id="method">Méthode de raisonnement</h2>${list(memo.method, true)}</section>
       <section aria-labelledby="example"><h2 id="example">Exemple commenté</h2>${context}${[{title: memo.exampleTitle, code: memo.code, explanation: memo.explanation}, ...(memo.additionalExamples || [])].map(example => `${example.title ? `<h3>${esc(example.title)}</h3>` : ''}<div class="code-label">${memo.language === 'sh' ? 'TERMINAL · JDK 21' : 'JAVA 21'}</div><pre><code>${esc(example.code)}</code></pre><p>${esc(example.explanation)}</p>`).join('')}</section>
       <section aria-labelledby="pitfalls"><h2 id="pitfalls">Pièges</h2>${list(memo.pitfalls)}</section>
