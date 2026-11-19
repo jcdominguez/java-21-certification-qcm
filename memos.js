@@ -1693,10 +1693,39 @@ export const memos = [
     ],
     "code": "String resultat = Stream.of(\"J\", \"D\", \"K\")\n    .collect(Collectors.joining(\"-\", \"(\", \")\"));\nSystem.out.print(resultat);",
     "explanation": "Le séparateur est placé entre les valeurs, à l’intérieur du préfixe et du suffixe.",
+    "additionalExamples": [
+      {
+        "title": "Que deviennent « chat » et « rat » ?",
+        "code": "var mots = List.of(\"chat\", \"rat\");\nSystem.out.println(mots.stream().toList());\nSystem.out.println(mots.stream().collect(Collectors.joining(\" / \")));\nvar parLongueur = mots.stream().collect(\n    Collectors.toMap(String::length, mot -> mot));\nSystem.out.println(parLongueur.get(4));\nSystem.out.print(parLongueur.get(3));",
+        "explanation": "toList() conserve les deux mots dans l’ordre du stream. joining construit une seule chaîne, « chat / rat ». Avec toMap, lis String::length comme mot -> mot.length() : « chat » donne la clé 4 et « rat » la clé 3. La seconde fonction, mot -> mot, conserve le mot comme valeur. Chercher la clé 4 donne donc « chat ».",
+        "check": {
+          "output": "[chat, rat]\nchat / rat\nchat\nrat"
+        }
+      },
+      {
+        "title": "Que se passe-t-il si on ajoute « loup » ?",
+        "code": "try {\n    Stream.of(\"chat\", \"rat\", \"loup\").collect(\n        Collectors.toMap(String::length, mot -> mot));\n} catch (IllegalStateException e) {\n    System.out.print(e.getClass().getSimpleName());\n}",
+        "explanation": "Écris les clés dans l’ordre : 4, 3, 4. Quand « loup » arrive, la clé 4 est déjà associée à « chat ». Avec deux arguments, toMap lève IllegalStateException à cette étape. Le catch permet d’afficher le nom de l’exception.",
+        "check": {
+          "output": "IllegalStateException"
+        }
+      },
+      {
+        "title": "Quelle valeur restera sous la clé 4 ?",
+        "code": "var mots = List.of(\"chat\", \"rat\", \"loup\");\nvar premiers = mots.stream().collect(Collectors.toMap(\n    String::length, mot -> mot, (ancienne, nouvelle) -> ancienne));\nvar derniers = mots.stream().collect(Collectors.toMap(\n    String::length, mot -> mot, (ancienne, nouvelle) -> nouvelle));\nSystem.out.println(premiers.get(4));\nSystem.out.print(derniers.get(4));",
+        "explanation": "Au second passage sur la clé 4, la fonction de fusion reçoit les deux valeurs : ancienne vaut « chat » et nouvelle vaut « loup ». Son résultat devient la valeur associée à 4. La première variante garde « chat », la seconde garde « loup ». La clé 3 garde « rat » dans les deux cas.",
+        "check": {
+          "output": "chat\nloup"
+        }
+      }
+    ],
     "pitfalls": [
       "Collectors.toList ne garantit pas le type concret de la liste.",
-      "Pour toMap, fournir une fusion si plusieurs éléments partagent une clé."
+      "Pour toMap, fournir une fusion si plusieurs éléments partagent une clé.",
+      "Avant de répondre : quelle clé est-ce que je calcule ? Quelle valeur est-ce que j’y range ? Si la clé revient, quelle règle s’applique ?",
+      "Ne pas confondre Collectors.toMap(…), qui indique à collect comment construire une Map Java, avec Stream.map(…), qui renvoie un nouveau stream en appliquant une fonction à chaque élément."
     ],
+    "pitfallCode": "Stream.of(\"chat\", \"loup\")\n    .map(String::length)\n    .toList();  // [4, 4] : deux éléments de même valeur\n\nStream.of(\"chat\", \"loup\")\n    .collect(Collectors.toMap(String::length, mot -> mot));\n    // IllegalStateException : deux mots pour la même clé 4, sans fusion",
     "sources": [
       {
         "title": "Documentation officielle Java SE 21",
