@@ -1582,12 +1582,12 @@ export const memos = [
       "Identifier si la source est finie.",
       "Simuler les premières valeurs et l’arrêt du préfixe avant d’évaluer la terminale."
     ],
-    "code": "System.out.print(Stream.iterate(2, n -> n + 2)\n    .limit(5).takeWhile(n -> n < 7).toList());",
+    "code": "System.out.print(Stream.iterate(2, n -> n + 2)\n    .limit(5).takeWhile(n -> n < 7).toList()); // [2, 4, 6]",
     "explanation": "La source limitée vaut 2, 4, 6, 8, 10 ; takeWhile s’arrête avant 8.",
     "additionalExamples": [
       {
         "title": "takeWhile et dropWhile sur les mêmes valeurs",
-        "code": "System.out.println(Stream.of(1, 2, 5, 1, 3).takeWhile(n -> n < 5).toList());\nSystem.out.println(Stream.of(1, 2, 5, 1, 3).dropWhile(n -> n < 5).toList());",
+        "code": "System.out.println(Stream.of(1, 2, 5, 1, 3).takeWhile(n -> n < 5).toList()); // [1, 2]\nSystem.out.println(Stream.of(1, 2, 5, 1, 3).dropWhile(n -> n < 5).toList()); // [5, 1, 3]",
         "explanation": "Le premier false arrive à 5. takeWhile conserve les éléments avant ce point et donne [1, 2]. dropWhile conserve 5 et toute la suite, ce qui donne [5, 1, 3]. Le deuxième 1 et le 3 restent dans le résultat même si la condition est vraie pour eux.",
         "check": {
           "output": "[1, 2]\n[5, 1, 3]\n"
