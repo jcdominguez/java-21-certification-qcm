@@ -64,7 +64,8 @@ export const memos = [
     "group": "values",
     "title": "Types primitifs, wrappers, boxing et unboxing",
     "rules": [
-      "Un primitif contient une valeur ; son wrapper est un objet et peut être null. Le boxing transforme une valeur primitive en wrapper, et l’unboxing effectue le chemin inverse."
+      "Un primitif contient une valeur ; son wrapper est un objet et peut être null.",
+      "Le boxing transforme une valeur primitive en wrapper, et l’unboxing effectue le chemin inverse."
     ],
     "method": [
       "Identifier le type déclaré et la présence éventuelle de null.",
@@ -94,7 +95,8 @@ export const memos = [
     "group": "values",
     "title": "Conversions, promotions numériques et casts",
     "rules": [
-      "Les opérations arithmétiques sur byte, short et char produisent généralement un int. Une conversion réductrice peut perdre des bits ; ++ et les affectations composées incluent une conversion vers le type de gauche."
+      "Les opérations arithmétiques sur byte, short et char produisent généralement un int.",
+      "Une conversion réductrice peut perdre des bits ; ++ et les affectations composées incluent une conversion vers le type de gauche."
     ],
     "method": [
       "Déterminer le type de chaque opérande avant de calculer.",
@@ -125,7 +127,9 @@ export const memos = [
     "group": "values",
     "title": "Opérateurs, priorités et court-circuit booléen",
     "rules": [
-      "La priorité fixe le regroupement des opérateurs. Une division entre entiers reste entière. && et || peuvent ne pas évaluer leur opérande droit."
+      "La priorité fixe le regroupement des opérateurs.",
+      "Une division entre entiers reste entière.",
+      "&& et || peuvent ne pas évaluer leur opérande droit."
     ],
     "method": [
       "Parenthéser mentalement les expressions selon leur priorité.",
@@ -156,7 +160,8 @@ export const memos = [
     "group": "values",
     "title": "Math : calculs, arrondis et limites numériques",
     "rules": [
-      "floor arrondit vers moins l’infini, ceil vers plus l’infini. round choisit l’entier le plus proche avec les égalités vers plus l’infini ; son type de retour dépend de la surcharge."
+      "floor arrondit vers moins l’infini, ceil vers plus l’infini.",
+      "round choisit l’entier le plus proche avec les égalités vers plus l’infini ; son type de retour dépend de la surcharge."
     ],
     "method": [
       "Vérifier si l’argument est float ou double.",
@@ -184,7 +189,9 @@ export const memos = [
     "group": "values",
     "title": "String : immuabilité, comparaison et manipulation",
     "rules": [
-      "String est immuable : ses méthodes ne modifient pas l’objet initial. Les bornes de substring sont début inclus, fin exclue. Avec +, la présence d’une chaîne entraîne une concaténation."
+      "String est immuable : ses méthodes ne modifient pas l’objet initial.",
+      "Les bornes de substring sont début inclus, fin exclue.",
+      "Avec +, la présence d’une chaîne entraîne une concaténation."
     ],
     "method": [
       "Suivre les réaffectations, pas seulement les appels de méthodes.",
@@ -215,7 +222,8 @@ export const memos = [
     "group": "values",
     "title": "StringBuilder : modifications et chaînage",
     "rules": [
-      "StringBuilder est mutable. append, delete, insert et reverse modifient le même objet et renvoient généralement ce builder pour permettre le chaînage."
+      "StringBuilder est mutable.",
+      "append, delete, insert et reverse modifient le même objet et renvoient généralement ce builder pour permettre le chaînage."
     ],
     "method": [
       "Réécrire le contenu après chaque appel.",
@@ -245,7 +253,8 @@ export const memos = [
     "group": "values",
     "title": "Text blocks et séquences d’échappement",
     "rules": [
-      "Un text block est un littéral String multiligne. Le délimiteur ouvrant est suivi d’un saut de ligne ; l’indentation incidente est retirée et les échappements sont interprétés."
+      "Un text block est un littéral String multiligne.",
+      "Le délimiteur ouvrant est suivi d’un saut de ligne ; l’indentation incidente est retirée et les échappements sont interprétés."
     ],
     "method": [
       "Repérer la position du délimiteur fermant pour déterminer l’indentation et le saut de ligne final.",
@@ -275,7 +284,9 @@ export const memos = [
     "group": "values",
     "title": "Dates, heures et instants avec java.time",
     "rules": [
-      "LocalDate représente une date, LocalTime une heure, LocalDateTime leur combinaison sans fuseau. Instant représente un point sur la ligne du temps. Ces objets sont immuables."
+      "LocalDate représente une date, LocalTime une heure, LocalDateTime leur combinaison sans fuseau.",
+      "Instant représente un point sur la ligne du temps.",
+      "LocalDate, LocalTime, LocalDateTime et Instant sont immuables."
     ],
     "method": [
       "Choisir le type selon la présence d’une date, d’une heure et d’un fuseau.",
@@ -307,7 +318,8 @@ export const memos = [
     "group": "values",
     "title": "Duration et Period : calculs temporels",
     "rules": [
-      "Duration mesure une quantité en secondes et nanosecondes. Period représente des années, mois et jours ; ses mois ne correspondent pas à un nombre fixe de secondes."
+      "Duration mesure une quantité en secondes et nanosecondes.",
+      "Period représente des années, mois et jours ; ses mois ne correspondent pas à un nombre fixe de secondes."
     ],
     "method": [
       "Distinguer quantité chronométrée et quantité calendaire.",
@@ -338,7 +350,9 @@ export const memos = [
     "group": "values",
     "title": "Fuseaux horaires et changements d’heure",
     "rules": [
-      "ZoneId porte les règles d’un fuseau. ZonedDateTime combine date, heure et fuseau. Ajouter un jour local peut représenter 23, 24 ou 25 heures autour d’un changement d’heure."
+      "ZoneId porte les règles d’un fuseau.",
+      "ZonedDateTime combine date, heure et fuseau.",
+      "Ajouter un jour local peut représenter 23, 24 ou 25 heures autour d’un changement d’heure."
     ],
     "method": [
       "Identifier si l’ajout porte sur le calendrier ou sur une durée.",
@@ -369,7 +383,8 @@ export const memos = [
     "group": "flow",
     "title": "Conditions if / else",
     "rules": [
-      "if attend une expression boolean. Sans accolades, une branche ne contient qu’une instruction ; un else est associé au if admissible le plus proche."
+      "if attend une expression boolean.",
+      "Sans accolades, une branche ne contient qu’une instruction ; un else est associé au if admissible le plus proche."
     ],
     "method": [
       "Ajouter mentalement les accolades sans changer l’association des else.",
@@ -399,7 +414,9 @@ export const memos = [
     "group": "flow",
     "title": "Boucles, break, continue et étiquettes",
     "rules": [
-      "while teste avant le corps, do-while après. continue passe à l’itération suivante ; dans un for classique, la mise à jour est exécutée. break quitte la boucle ciblée."
+      "while teste avant le corps, do-while après.",
+      "continue passe à l’itération suivante ; dans un for classique, la mise à jour est exécutée.",
+      "break quitte la boucle ciblée."
     ],
     "method": [
       "Tracer les valeurs à l’entrée, dans le corps puis à la mise à jour.",
@@ -429,7 +446,9 @@ export const memos = [
     "group": "flow",
     "title": "switch : instruction, expression, yield et exhaustivité",
     "rules": [
-      "Une expression switch fournit une valeur et doit être exhaustive. Une branche fléchée n’a pas de fall-through ; un groupe classique avec deux-points peut continuer dans le suivant. yield fournit la valeur d’un bloc."
+      "Une expression switch fournit une valeur et doit être exhaustive.",
+      "Une branche fléchée n’a pas de fall-through ; un groupe classique avec deux-points peut continuer dans le suivant.",
+      "yield fournit la valeur d’un bloc."
     ],
     "method": [
       "Distinguer instruction et expression switch.",
@@ -459,7 +478,8 @@ export const memos = [
     "group": "objects",
     "title": "Objets, références et garbage collection",
     "rules": [
-      "Une variable de référence et l’objet désigné sont distincts. Réaffecter une variable ne détruit pas l’objet ; la collecte dépend de son accessibilité, sans garantie de collecte immédiate."
+      "Une variable de référence et l’objet désigné sont distincts.",
+      "Réaffecter une variable ne détruit pas l’objet ; la collecte dépend de son accessibilité, sans garantie de collecte immédiate."
     ],
     "method": [
       "Dessiner les références encore accessibles après chaque affectation.",
@@ -489,7 +509,8 @@ export const memos = [
     "group": "objects",
     "title": "Champs, méthodes et membres static",
     "rules": [
-      "Un champ d’instance appartient à chaque objet ; un champ static appartient à la classe. Une méthode static ne dispose pas de this."
+      "Un champ d’instance appartient à chaque objet ; un champ static appartient à la classe.",
+      "Une méthode static ne dispose pas de this."
     ],
     "method": [
       "Séparer l’état partagé par la classe de l’état propre à chaque instance.",
@@ -520,7 +541,9 @@ export const memos = [
     "group": "objects",
     "title": "Constructeurs et ordre d’initialisation",
     "rules": [
-      "L’initialisation de classe précède son utilisation active. Pour une instance, les initialisations de la superclasse précèdent celles de la sous-classe, puis son corps de constructeur. Sans constructeur déclaré, une classe ordinaire reçoit un constructeur par défaut."
+      "L’initialisation de classe précède son utilisation active.",
+      "Pour une instance, les initialisations de la superclasse précèdent celles de la sous-classe, puis son corps de constructeur.",
+      "Sans constructeur déclaré, une classe ordinaire reçoit un constructeur par défaut."
     ],
     "method": [
       "Séparer les étapes static, exécutées une fois, des étapes d’instance.",
@@ -550,7 +573,8 @@ export const memos = [
     "group": "objects",
     "title": "Portée des variables et inférence var",
     "rules": [
-      "var permet l’inférence du type d’une variable locale à partir de son initialiseur. Ce n’est pas un type dynamique et il ne permet pas une déclaration de champ ou de paramètre de méthode ordinaire."
+      "var permet l’inférence du type d’une variable locale à partir de son initialiseur.",
+      "var n’est pas un type dynamique et ne permet pas de déclarer un champ ou un paramètre de méthode ordinaire."
     ],
     "method": [
       "Vérifier que la déclaration se situe dans un contexte autorisé.",
@@ -580,7 +604,8 @@ export const memos = [
     "group": "objects",
     "title": "Encapsulation, copies défensives et immuabilité",
     "rules": [
-      "Une classe immuable protège son état contre toutes les modifications observables. final interdit la réaffectation d’une référence, pas la mutation de l’objet désigné."
+      "Une classe immuable protège son état contre toutes les modifications observables.",
+      "final interdit la réaffectation d’une référence, pas la mutation de l’objet désigné."
     ],
     "method": [
       "Chercher les alias transmis au constructeur et ceux exposés par les accesseurs.",
@@ -611,7 +636,9 @@ export const memos = [
     "group": "objects",
     "title": "Surcharge de méthodes et paramètres varargs",
     "rules": [
-      "La surcharge est choisie à la compilation selon les types des arguments. La résolution examine d’abord les appels sans boxing ni varargs, puis ceux avec boxing, puis les varargs. Le paramètre varargs doit être le dernier."
+      "La surcharge est choisie à la compilation selon les types des arguments.",
+      "La résolution examine d’abord les appels sans boxing ni varargs, puis ceux avec boxing, puis les varargs.",
+      "Le paramètre varargs doit être le dernier."
     ],
     "method": [
       "Lister les signatures applicables à chaque phase.",
@@ -642,7 +669,8 @@ export const memos = [
     "group": "objects",
     "title": "Héritage, classes abstraites et types sealed",
     "rules": [
-      "Une classe abstraite peut déclarer un contrat à compléter. sealed restreint les sous-types directs autorisés ; une sous-classe ordinaire directe est final, sealed ou non-sealed."
+      "Une classe abstraite peut déclarer un contrat à compléter.",
+      "sealed restreint les sous-types directs autorisés ; une sous-classe ordinaire directe est final, sealed ou non-sealed."
     ],
     "method": [
       "Vérifier les relations extends et implements.",
@@ -673,7 +701,10 @@ export const memos = [
     "group": "objects",
     "title": "Polymorphisme, redéfinition et masquage",
     "rules": [
-      "Une méthode d’instance redéfinie est choisie selon le type réel de l’objet. Les champs et les méthodes static sont sélectionnés selon le type de référence. Une redéfinition ne réduit pas la visibilité et peut utiliser un retour covariant."
+      "Une méthode d’instance redéfinie est choisie selon le type réel de l’objet.",
+      "Les champs et les méthodes static sont sélectionnés selon le type de référence (type déclaré de la variable).",
+      "Une méthode redéfinie doit être au moins aussi visible que la méthode d’origine : une méthode public ne peut pas devenir protected dans la sous-classe.",
+      "Une méthode redéfinie peut renvoyer un sous-type du type de retour d’origine (retour covariant) : si Animal.creer() renvoie Animal, Chat.creer() peut renvoyer Chat."
     ],
     "method": [
       "Identifier d’abord le type de la référence et celui de l’objet.",
@@ -704,7 +735,9 @@ export const memos = [
     "group": "objects",
     "title": "Casts de références et pattern matching avec instanceof",
     "rules": [
-      "Un cast de référence ne transforme pas l’objet. Le compilateur contrôle sa possibilité ; l’exécution vérifie la compatibilité réelle. instanceof avec pattern teste et déclare une variable utilisable là où la correspondance est garantie."
+      "Un cast de référence ne transforme pas l’objet.",
+      "Le compilateur contrôle qu’un cast est possible ; l’exécution vérifie la compatibilité réelle.",
+      "instanceof avec pattern teste et déclare une variable utilisable là où la correspondance est garantie."
     ],
     "method": [
       "Distinguer type statique et type réel.",
@@ -734,7 +767,9 @@ export const memos = [
     "group": "objects",
     "title": "switch à patterns : gardes, dominance et null",
     "rules": [
-      "Un switch à patterns peut sélectionner un type et appliquer une garde when. Les branches dominées sont rejetées. Sans case null approprié, un sélecteur null provoque NullPointerException, même avec default."
+      "Un switch à patterns peut sélectionner un type et appliquer une garde when.",
+      "Les branches dominées sont rejetées.",
+      "Sans case null approprié, un sélecteur null provoque NullPointerException, même avec default."
     ],
     "method": [
       "Placer les cas spécifiques avant les cas généraux.",
@@ -766,7 +801,9 @@ export const memos = [
     "group": "objects",
     "title": "Records : composants, constructeurs et décomposition",
     "rules": [
-      "Un record est implicitement final et définit son état par ses composants. Il fournit des accesseurs portant leur nom et des méthodes equals, hashCode et toString. Un constructeur compact peut normaliser ses paramètres avant l’affectation implicite."
+      "Un record est implicitement final et définit son état par ses composants.",
+      "Un record fournit des accesseurs portant le nom de ses composants et des méthodes equals, hashCode et toString.",
+      "Un constructeur compact peut normaliser ses paramètres avant l’affectation implicite."
     ],
     "method": [
       "Identifier les composants et les méthodes générées.",
@@ -797,7 +834,8 @@ export const memos = [
     "group": "objects",
     "title": "Interfaces : méthodes abstract, default, static et private",
     "rules": [
-      "Une interface peut déclarer des méthodes abstraites, default, static et private. Les méthodes default fournissent une implémentation héritée ; un conflit entre defaults indépendants doit être résolu."
+      "Une interface peut déclarer des méthodes abstraites, default, static et private.",
+      "Les méthodes default fournissent une implémentation héritée ; un conflit entre defaults indépendants doit être résolu."
     ],
     "method": [
       "Séparer le contrat abstrait des méthodes avec corps.",
@@ -858,7 +896,8 @@ export const memos = [
     "group": "objects",
     "title": "Enums : constantes, constructeurs et comportements",
     "rules": [
-      "Les constantes d’enum sont les instances définies par le type. Une enum peut avoir champs, méthodes et constructeurs non publics, et chaque constante peut spécialiser un comportement."
+      "Les constantes d’enum sont les instances définies par le type.",
+      "Une enum peut avoir champs, méthodes et constructeurs non publics, et chaque constante peut spécialiser un comportement."
     ],
     "method": [
       "Repérer les arguments de construction de chaque constante.",
@@ -866,6 +905,17 @@ export const memos = [
     ],
     "code": "enum Niveau {\n    BAS(1), HAUT(3);\n    final int poids;\n    Niveau(int poids) { this.poids = poids; }\n}\nSystem.out.print(Niveau.HAUT.poids);",
     "explanation": "Le constructeur associe le poids 3 à la constante HAUT.",
+    "exampleTitle": "Constructeur et champ d’une constante",
+    "additionalExamples": [
+      {
+        "title": "Comparer des constantes avec ==",
+        "code": "enum Feu { ROUGE, ORANGE, VERT }\nFeu lu = Feu.valueOf(\"ROUGE\");\nFeu inconnu = null;\nSystem.out.print((lu == Feu.ROUGE) + \" \" + (inconnu == Feu.VERT));",
+        "explanation": "Chaque constante d’enum n’existe qu’en un seul exemplaire : valueOf(\"ROUGE\") renvoie l’instance Feu.ROUGE elle-même, et == qui compare les références donne true. Avec null, == renvoie simplement false, alors que inconnu.equals(Feu.VERT) lèverait une NullPointerException. Le programme affiche « true false ». Entre constantes de deux enums différents, == ne compile pas (types incomparables).",
+        "check": {
+          "output": "true false"
+        }
+      }
+    ],
     "pitfalls": [
       "On ne crée pas une constante avec new dans le code client.",
       "== convient pour comparer deux constantes d’un même enum."
@@ -886,7 +936,8 @@ export const memos = [
     "group": "objects",
     "title": "Classes imbriquées et capture des variables locales",
     "rules": [
-      "Une classe membre non static possède normalement une instance englobante. Une classe imbriquée static n’en exige pas. Les variables locales capturées par une classe locale doivent être final ou effectivement final."
+      "Une classe membre non static possède normalement une instance englobante. Une classe imbriquée static n’en exige pas.",
+      "Les variables locales capturées par une classe locale doivent être final ou effectivement final."
     ],
     "method": [
       "Identifier la catégorie de classe imbriquée.",
@@ -916,7 +967,8 @@ export const memos = [
     "group": "objects",
     "title": "Object : contrats equals et hashCode",
     "rules": [
-      "Deux objets égaux selon equals doivent avoir le même hashCode. La réciproque est fausse : des collisions sont possibles. Object.equals utilise l’identité si la classe ne le redéfinit pas."
+      "Deux objets égaux selon equals doivent avoir le même hashCode. La réciproque est fausse : des collisions sont possibles.",
+      "Object.equals utilise l’identité si la classe ne le redéfinit pas."
     ],
     "method": [
       "Vérifier si equals est redéfini ou généré.",
@@ -947,10 +999,15 @@ export const memos = [
     "group": "exceptions",
     "title": "Hiérarchie des exceptions : classes principales et multi-catch",
     "rules": [
-      "Throwable est la racine des objets pouvant être levés. Ses branches Error et Exception sont distinctes : Error n’est pas une sous-classe d’Exception. RuntimeException est en revanche une sous-classe d’Exception.",
-      "Error et RuntimeException, ainsi que leurs sous-classes, sont unchecked : le compilateur n’impose pas de les intercepter ou de les déclarer. Les autres classes d’exceptions sont checked. La catégorie checked/unchecked dépend de l’héritage, pas du nom de la classe.",
-      "Un catch intercepte le type déclaré et ses sous-types. Dans un multi-catch A | B, aucun des deux types ne peut être un sous-type de l’autre : un ancêtre et son descendant ne peuvent pas figurer dans la même liste. Deux branches distinctes peuvent partager un ancêtre commun.",
-      "L’arborescence sélectionne les repères utiles aux questions sur les exceptions, les collections, la concurrence, les dates et les entrées-sorties. Chaque indentation représente un héritage direct. Les descendants héritent de la catégorie de leur branche."
+      "Throwable est la racine des objets pouvant être levés.",
+      "Throwable a deux branches distinctes, Error et Exception : Error n’est pas une sous-classe d’Exception. RuntimeException est en revanche une sous-classe d’Exception.",
+      "Error et RuntimeException, ainsi que leurs sous-classes, sont unchecked : le compilateur n’impose pas de les intercepter ou de les déclarer. Les autres classes d’exceptions sont checked.",
+      "La catégorie checked/unchecked dépend de l’héritage, pas du nom de la classe.",
+      "Un catch intercepte le type déclaré et ses sous-types.",
+      "Dans un multi-catch A | B, aucun des deux types ne peut être un sous-type de l’autre : un ancêtre et son descendant ne peuvent pas figurer dans la même liste. Deux branches distinctes peuvent partager un ancêtre commun.",
+      "L’arborescence sélectionne les repères utiles aux questions sur les exceptions, les collections, la concurrence, les dates et les entrées-sorties.",
+      "Chaque indentation représente un héritage direct.",
+      "Les descendants héritent de la catégorie de leur branche."
     ],
     "hierarchy": "Throwable [racine des objets pouvant être levés]\n├── Error [unchecked]\n│   ├── AssertionError\n│   └── VirtualMachineError\n│       ├── OutOfMemoryError\n│       └── StackOverflowError\n└── Exception [checked, sauf sa branche RuntimeException]\n    ├── IOException [checked]\n    │   ├── FileNotFoundException\n    │   ├── EOFException\n    │   └── ObjectStreamException\n    │       └── NotSerializableException\n    ├── SQLException [checked]\n    ├── InterruptedException [checked]\n    ├── ExecutionException [checked]\n    └── RuntimeException [unchecked]\n        ├── NullPointerException\n        ├── ClassCastException\n        ├── ArithmeticException\n        ├── ArrayStoreException\n        ├── IllegalArgumentException\n        │   └── NumberFormatException\n        ├── IllegalStateException\n        ├── IndexOutOfBoundsException\n        │   ├── ArrayIndexOutOfBoundsException\n        │   └── StringIndexOutOfBoundsException\n        ├── UnsupportedOperationException\n        ├── NoSuchElementException\n        ├── MissingResourceException\n        └── DateTimeException\n            └── DateTimeParseException",
     "method": [
@@ -1004,7 +1061,9 @@ export const memos = [
     "group": "exceptions",
     "title": "Exceptions checked, unchecked et exceptions personnalisées",
     "rules": [
-      "Les sous-types de RuntimeException et Error sont unchecked. Les autres exceptions checked doivent être interceptées ou déclarées. Une exception personnalisée choisit son contrat en étendant la classe appropriée."
+      "Les sous-types de RuntimeException et Error sont unchecked.",
+      "Les autres exceptions checked doivent être interceptées ou déclarées.",
+      "Une exception personnalisée choisit son contrat en étendant la classe appropriée."
     ],
     "method": [
       "Examiner la hiérarchie du type levé.",
@@ -1035,7 +1094,9 @@ export const memos = [
     "group": "exceptions",
     "title": "try / catch / finally, propagation et multi-catch",
     "rules": [
-      "Les catch sont examinés dans l’ordre ; un type spécifique doit précéder un supertype qui le couvre. Les alternatives d’un multi-catch ne peuvent pas être en relation de sous-typage. finally intervient à la sortie du try/catch selon les règles du langage."
+      "Les catch sont examinés dans l’ordre ; un type spécifique doit précéder un supertype qui le couvre.",
+      "Les alternatives d’un multi-catch ne peuvent pas être en relation de sous-typage.",
+      "finally intervient à la sortie du try/catch selon les règles du langage."
     ],
     "method": [
       "Trouver le premier catch compatible avec l’exception.",
@@ -1066,7 +1127,8 @@ export const memos = [
     "group": "exceptions",
     "title": "Exceptions et redéfinition de méthodes",
     "rules": [
-      "Une méthode redéfinie peut supprimer ou restreindre les exceptions checked du contrat initial. Elle ne peut pas ajouter une exception checked indépendante ou plus générale. Les exceptions unchecked n’ont pas cette restriction."
+      "Une méthode redéfinie peut supprimer ou restreindre les exceptions checked du contrat initial. Elle ne peut pas ajouter une exception checked indépendante ou plus générale.",
+      "Une redéfinition peut ajouter librement des exceptions unchecked."
     ],
     "method": [
       "Comparer chaque exception checked déclarée avec celles de la méthode héritée.",
@@ -1097,7 +1159,9 @@ export const memos = [
     "group": "exceptions",
     "title": "try-with-resources : fermeture et exceptions supprimées",
     "rules": [
-      "Les ressources doivent être AutoCloseable. Elles sont fermées en ordre inverse d’initialisation. Si le corps lève une exception et la fermeture aussi, l’exception de fermeture est ajoutée aux exceptions supprimées de la principale."
+      "Les ressources doivent être AutoCloseable.",
+      "Les ressources sont fermées en ordre inverse d’initialisation.",
+      "Si le corps lève une exception et la fermeture aussi, l’exception de fermeture est ajoutée aux exceptions supprimées de la principale."
     ],
     "method": [
       "Lister les ressources initialisées avec succès.",
@@ -1127,7 +1191,8 @@ export const memos = [
     "group": "collections",
     "title": "Tableaux : création, accès et covariance",
     "rules": [
-      "Les tableaux ont une longueur fixe et leurs indices vont de zéro à length - 1. Les tableaux de références sont covariants, mais le type réel de leurs éléments est contrôlé lors des écritures."
+      "Les tableaux ont une longueur fixe et leurs indices vont de zéro à length - 1.",
+      "Les tableaux de références sont covariants, mais le type réel de leurs éléments est contrôlé lors des écritures."
     ],
     "method": [
       "Distinguer type déclaré du tableau et type réel créé par new.",
@@ -1158,7 +1223,9 @@ export const memos = [
     "group": "collections",
     "title": "List : indices, valeurs et opérations courantes",
     "rules": [
-      "List conserve un ordre et peut contenir des doublons. get et set utilisent des indices. Pour List<Integer>, remove(int) enlève par indice et remove(Object) par valeur."
+      "List conserve un ordre et peut contenir des doublons.",
+      "get et set utilisent des indices.",
+      "Pour List<Integer>, remove(int) enlève par indice et remove(Object) par valeur."
     ],
     "method": [
       "Lire le type exact de l’argument pour choisir la surcharge.",
@@ -1189,7 +1256,9 @@ export const memos = [
     "group": "collections",
     "title": "Listes modifiables, non modifiables et vues",
     "rules": [
-      "List.of fournit une liste non modifiable sans éléments null. Arrays.asList fournit une vue de taille fixe adossée au tableau. Une copie dans ArrayList crée une liste structurellement modifiable."
+      "List.of fournit une liste non modifiable sans éléments null.",
+      "Arrays.asList fournit une vue de taille fixe adossée au tableau.",
+      "new ArrayList<>(source) copie les éléments dans une nouvelle liste, modifiable en contenu et en taille, et indépendante de source : ajouter ou retirer un élément ne modifie pas l’original."
     ],
     "method": [
       "Identifier la fabrique utilisée.",
@@ -1220,7 +1289,8 @@ export const memos = [
     "group": "collections",
     "title": "Set : unicité, comparaison et ordre",
     "rules": [
-      "Un Set conserve des éléments uniques. HashSet s’appuie sur equals et hashCode ; TreeSet utilise son ordre de comparaison pour déterminer les équivalences et trie ses éléments."
+      "Un Set conserve des éléments uniques.",
+      "HashSet s’appuie sur equals et hashCode ; TreeSet utilise son ordre de comparaison pour déterminer les équivalences et trie ses éléments."
     ],
     "method": [
       "Identifier l’implémentation et son critère d’équivalence.",
@@ -1251,7 +1321,9 @@ export const memos = [
     "group": "collections",
     "title": "Map : clés, valeurs et opérations de mise à jour",
     "rules": [
-      "Une Map associe au plus une valeur à chaque clé. put remplace la valeur associée. merge combine une valeur présente non null avec la valeur fournie ; compute calcule une association à partir de la clé et de sa valeur actuelle."
+      "Une Map associe au plus une valeur à chaque clé.",
+      "put remplace la valeur associée.",
+      "merge combine une valeur présente non null avec la valeur fournie ; compute calcule une association à partir de la clé et de sa valeur actuelle."
     ],
     "method": [
       "Suivre l’état de chaque clé après chaque opération.",
@@ -1281,7 +1353,9 @@ export const memos = [
     "group": "collections",
     "title": "Deque : pile, file et comportement à vide",
     "rules": [
-      "Deque permet l’accès aux deux extrémités. push/pop travaillent en tête selon une pile LIFO. Les variantes poll et peek renvoient null à vide, alors que remove et get lèvent une exception."
+      "Deque permet l’accès aux deux extrémités.",
+      "push/pop travaillent en tête selon une pile LIFO.",
+      "Les variantes poll et peek renvoient null à vide, alors que remove et get lèvent une exception."
     ],
     "method": [
       "Dessiner la tête et la queue après chaque ajout.",
@@ -1309,7 +1383,9 @@ export const memos = [
     "group": "collections",
     "title": "Trier et rechercher : Comparable, Comparator et binarySearch",
     "rules": [
-      "Comparable définit un ordre naturel ; Comparator fournit un ordre externe. Une recherche binaire exige que les données soient déjà triées selon le même ordre. Un résultat négatif encode le point d’insertion."
+      "Comparable définit un ordre naturel ; Comparator fournit un ordre externe.",
+      "Une recherche binaire exige que les données soient déjà triées selon le même ordre.",
+      "Un résultat négatif de binarySearch encode le point d’insertion."
     ],
     "method": [
       "Identifier le comparateur effectif.",
@@ -1339,7 +1415,8 @@ export const memos = [
     "group": "collections",
     "title": "Collections séquencées et vues inversées",
     "rules": [
-      "Java 21 fournit les interfaces de collections séquencées pour les collections à ordre de rencontre défini. reversed produit une vue dans l’ordre inverse, et non une copie indépendante."
+      "Java 21 fournit les interfaces de collections séquencées pour les collections à ordre de rencontre défini.",
+      "reversed produit une vue dans l’ordre inverse, et non une copie indépendante."
     ],
     "method": [
       "Repérer le premier et le dernier élément dans les deux vues.",
@@ -1369,7 +1446,8 @@ export const memos = [
     "group": "streams",
     "title": "Lambdas, références de méthodes et interfaces fonctionnelles",
     "rules": [
-      "Une lambda ou une référence de méthode est typée par une interface fonctionnelle cible. Predicate teste, Function transforme, Consumer consomme et Supplier fournit sans argument."
+      "Une lambda ou une référence de méthode est typée par une interface fonctionnelle cible.",
+      "Predicate teste, Function transforme, Consumer consomme et Supplier fournit sans argument."
     ],
     "method": [
       "Écrire la signature attendue : paramètres et type de retour.",
@@ -1400,7 +1478,9 @@ export const memos = [
     "group": "streams",
     "title": "Pipeline de stream : paresse et consommation unique",
     "rules": [
-      "Un pipeline contient une source, des opérations intermédiaires et une opération terminale. Les intermédiaires sont paresseux ; certaines optimisations peuvent éviter leur exécution. Un stream consommé ne se réutilise pas."
+      "Un pipeline contient une source, des opérations intermédiaires et une opération terminale.",
+      "Les opérations intermédiaires sont paresseuses ; certaines optimisations peuvent éviter leur exécution.",
+      "Un stream consommé ne se réutilise pas."
     ],
     "method": [
       "Repérer l’opération terminale et ce qu’elle exige réellement.",
@@ -1430,7 +1510,8 @@ export const memos = [
     "group": "streams",
     "title": "Créer des streams objets et primitifs",
     "rules": [
-      "Stream<T> manipule des références. IntStream, LongStream et DoubleStream fournissent des opérations spécialisées ; range exclut sa borne finale et rangeClosed l’inclut."
+      "Stream<T> manipule des références.",
+      "IntStream, LongStream et DoubleStream fournissent des opérations spécialisées ; range exclut sa borne finale et rangeClosed l’inclut."
     ],
     "method": [
       "Déterminer le type de stream créé par la source.",
@@ -1460,7 +1541,8 @@ export const memos = [
     "group": "streams",
     "title": "Filtrer, transformer, aplatir, trier et dédupliquer",
     "rules": [
-      "filter garde les éléments acceptés par un Predicate ; map transforme un élément ; flatMap transforme puis aplatit des streams. distinct supprime les doublons et sorted applique un ordre."
+      "filter garde les éléments acceptés par un Predicate ; map transforme un élément ; flatMap transforme puis aplatit des streams.",
+      "distinct supprime les doublons et sorted applique un ordre."
     ],
     "method": [
       "Noter le type des éléments après chaque étape.",
@@ -1490,7 +1572,9 @@ export const memos = [
     "group": "streams",
     "title": "Streams infinis, limit, takeWhile et dropWhile",
     "rules": [
-      "iterate et generate peuvent produire des streams infinis. limit borne le nombre d’éléments. Sur un stream ordonné, takeWhile garde le préfixe accepté et dropWhile retire ce préfixe."
+      "iterate et generate peuvent produire des streams infinis.",
+      "limit borne le nombre d’éléments.",
+      "Sur un stream ordonné, takeWhile garde le préfixe accepté et dropWhile retire ce préfixe."
     ],
     "method": [
       "Identifier si la source est finie.",
@@ -1520,7 +1604,9 @@ export const memos = [
     "group": "streams",
     "title": "Recherche, tests et résultats Optional",
     "rules": [
-      "findFirst et les réductions sans identité peuvent ne pas produire de valeur et utilisent Optional. orElse évalue son argument avant l’appel ; orElseGet appelle son Supplier seulement si nécessaire. Sur un stream vide, allMatch et noneMatch sont vrais, anyMatch est faux."
+      "findFirst et les réductions sans identité peuvent ne pas produire de valeur et utilisent Optional.",
+      "orElse évalue son argument avant l’appel ; orElseGet appelle son Supplier seulement si nécessaire.",
+      "Sur un stream vide, allMatch et noneMatch sont vrais, anyMatch est faux."
     ],
     "method": [
       "Déterminer si le stream peut être vide.",
@@ -1551,7 +1637,9 @@ export const memos = [
     "group": "streams",
     "title": "Réduction : identité, accumulateur et combinateur",
     "rules": [
-      "reduce combine les éléments. Sans identité, un stream vide produit un Optional vide. Une identité doit être neutre pour une réduction parallèle correcte, avec une opération associative et un combinateur compatible."
+      "reduce combine les éléments.",
+      "Sans identité, reduce renvoie un Optional, vide si le stream est vide.",
+      "Une identité doit être neutre pour une réduction parallèle correcte, avec une opération associative et un combinateur compatible."
     ],
     "method": [
       "Évaluer le cas vide et un petit cas séquentiel.",
@@ -1581,7 +1669,10 @@ export const memos = [
     "group": "streams",
     "title": "Collecter : listes, maps et chaînes",
     "rules": [
-      "collect utilise un collecteur pour accumuler des résultats. toMap sans fusion rejette les clés en doublon. joining combine des chaînes. Stream.toList fournit une liste non modifiable sans garantir une classe concrète."
+      "collect utilise un collecteur pour accumuler des résultats.",
+      "toMap sans fusion rejette les clés en doublon.",
+      "joining combine des chaînes.",
+      "Stream.toList fournit une liste non modifiable sans garantir une classe concrète."
     ],
     "method": [
       "Identifier le type du résultat et les fonctions de clé et de valeur.",
@@ -1612,7 +1703,9 @@ export const memos = [
     "group": "streams",
     "title": "Regrouper et partitionner",
     "rules": [
-      "groupingBy classe les éléments selon une clé. partitioningBy sépare selon un Predicate et fournit les clés true et false, même si une partition est vide. Un collecteur aval transforme chaque groupe."
+      "groupingBy classe les éléments selon une clé.",
+      "partitioningBy sépare selon un Predicate et fournit les clés true et false, même si une partition est vide.",
+      "Un collecteur aval transforme chaque groupe."
     ],
     "method": [
       "Distinguer classification à plusieurs clés et partition booléenne.",
@@ -1642,7 +1735,8 @@ export const memos = [
     "group": "streams",
     "title": "Concaténer des streams",
     "rules": [
-      "Stream.concat combine deux streams, en conservant l’ordre du premier puis du second si les deux sont ordonnés. Le résultat est paresseux ; ses sources ne doivent pas être réutilisées."
+      "Stream.concat combine deux streams, en conservant l’ordre du premier puis du second si les deux sont ordonnés.",
+      "Le stream renvoyé par Stream.concat est paresseux ; ses sources ne doivent pas être réutilisées."
     ],
     "method": [
       "Identifier l’ordre de rencontre des sources.",
@@ -1672,7 +1766,8 @@ export const memos = [
     "group": "modules",
     "title": "Lire et remplir module-info.java",
     "rules": [
-      "module-info.java se place à la racine des sources du module. Il commence par module suivi du nom du module, puis liste ses directives entre accolades.",
+      "module-info.java se place à la racine des sources du module.",
+      "module-info.java commence par module suivi du nom du module, puis liste ses directives entre accolades.",
       "Les directives forment trois familles : requires pour ce dont le module a besoin, exports et opens pour ce qu’il montre, uses et provides pour les services qu’il consomme ou fournit.",
       "Sans aucune directive, un module ne requiert que java.base, implicitement, et ne montre aucun package."
     ],
@@ -1713,7 +1808,9 @@ export const memos = [
     "group": "modules",
     "title": "Descripteur de module et dépendances requires",
     "rules": [
-      "module-info.java définit un module nommé. requires déclare une dépendance, requires transitive la rend lisible aux consommateurs, requires static la requiert à la compilation mais pas nécessairement à l’exécution. java.base est implicitement requis."
+      "module-info.java définit un module nommé.",
+      "requires déclare une dépendance, requires transitive la rend lisible aux consommateurs, requires static la requiert à la compilation mais pas nécessairement à l’exécution.",
+      "java.base est implicitement requis."
     ],
     "method": [
       "Dessiner le graphe de lisibilité entre modules.",
@@ -1746,7 +1843,9 @@ export const memos = [
     "group": "modules",
     "title": "exports, opens et accès par réflexion",
     "rules": [
-      "exports expose les types publics d’un package aux modules lecteurs. opens autorise l’accès réflexif profond au package, sans remplacer l’export nécessaire aux accès ordinaires dans le code source. Les deux peuvent être qualifiés avec to."
+      "exports expose les types publics d’un package aux modules lecteurs.",
+      "opens autorise l’accès réflexif profond au package, sans remplacer l’export nécessaire aux accès ordinaires dans le code source.",
+      "exports et opens peuvent tous deux être qualifiés avec to."
     ],
     "method": [
       "Vérifier d’abord la lisibilité, puis l’export pour un accès source.",
@@ -1781,9 +1880,12 @@ export const memos = [
     "group": "modules",
     "title": "Services : uses, provides et ServiceLoader",
     "rules": [
-      "Un service permet à un module d’utiliser une fonctionnalité sans dépendre du module qui la fournit. Il fait intervenir trois rôles : le contrat, un type (souvent une interface) ; le fournisseur, qui en livre une implémentation ; le consommateur, qui demande à ServiceLoader les implémentations disponibles.",
+      "Un service permet à un module d’utiliser une fonctionnalité sans dépendre du module qui la fournit.",
+      "Un service fait intervenir trois rôles : le contrat, un type (souvent une interface) ; le fournisseur, qui en livre une implémentation ; le consommateur, qui demande à ServiceLoader les implémentations disponibles.",
       "Le consommateur ne déclare aucun requires vers les fournisseurs. Ajouter un fournisseur revient à placer un module de plus sur le module path, sans modifier ni recompiler le consommateur.",
-      "Le consommateur déclare uses avec le type du service. Le fournisseur déclare provides … with … avec son implémentation. ServiceLoader découvre les fournisseurs selon les règles des modules et du chargement."
+      "Le consommateur déclare uses avec le type du service.",
+      "Le fournisseur déclare provides … with … avec son implémentation.",
+      "ServiceLoader découvre les fournisseurs selon les règles des modules et du chargement."
     ],
     "method": [
       "Séparer contrat, consommateur et fournisseur.",
@@ -1813,13 +1915,39 @@ export const memos = [
         "revision/impl/Fournisseur.java": "package revision.impl; public class Fournisseur implements revision.api.Service { public Fournisseur() {} }"
       }
     }
+,
+    "exampleTitle": "Un seul module, consommateur et fournisseur",
+    "additionalExamples": [
+      {
+        "title": "Contrat, fournisseurs et consommateur dans des modules séparés",
+        "code": "// paiement.api/module-info.java\nmodule paiement.api {\n    exports com.paiement.api;\n}\n\n// paiement.api/com/paiement/api/Paiement.java\npackage com.paiement.api;\n\npublic interface Paiement {\n    String nom();\n}\n\n// paiement.carte/module-info.java\nmodule paiement.carte {\n    requires paiement.api;\n    provides com.paiement.api.Paiement with com.paiement.carte.PaiementCarte;\n}\n\n// paiement.carte/com/paiement/carte/PaiementCarte.java\npackage com.paiement.carte;\n\nimport com.paiement.api.Paiement;\n\npublic class PaiementCarte implements Paiement {\n    public String nom() { return \"carte\"; }\n}\n\n// paiement.virement/module-info.java\nmodule paiement.virement {\n    requires paiement.api;\n    provides com.paiement.api.Paiement with com.paiement.virement.PaiementVirement;\n}\n\n// paiement.virement/com/paiement/virement/PaiementVirement.java\npackage com.paiement.virement;\n\nimport com.paiement.api.Paiement;\n\npublic class PaiementVirement implements Paiement {\n    public String nom() { return \"virement\"; }\n}\n\n// boutique/module-info.java\nmodule boutique {\n    requires paiement.api;\n    uses com.paiement.api.Paiement;\n}\n\n// boutique/com/boutique/Main.java\npackage com.boutique;\n\nimport com.paiement.api.Paiement;\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.List;\nimport java.util.ServiceLoader;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<String> noms = new ArrayList<>();\n        for (Paiement p : ServiceLoader.load(Paiement.class)) {\n            noms.add(p.nom());\n        }\n        Collections.sort(noms);\n        System.out.print(\"Moyens trouvés : \" + noms);\n    }\n}",
+        "explanation": "paiement.api exporte le contrat Paiement. paiement.carte et paiement.virement requièrent ce contrat et fournissent chacun une implémentation, sans exporter aucun package. boutique requiert seulement le contrat, déclare uses et reçoit de ServiceLoader un objet par fournisseur présent sur le module path, sans jamais nommer PaiementCarte ni PaiementVirement. Le programme affiche « Moyens trouvés : [carte, virement] » ; le tri rend la sortie indépendante de l’ordre dans lequel ServiceLoader rend les fournisseurs. Ajouter ou retirer un module fournisseur ne demande aucune modification de boutique.",
+        "check": {
+          "kind": "modules",
+          "main": "boutique/com.boutique.Main",
+          "output": "Moyens trouvés : [carte, virement]",
+          "files": {
+            "paiement.api/module-info.java": "module paiement.api {\n    exports com.paiement.api;\n}",
+            "paiement.api/com/paiement/api/Paiement.java": "package com.paiement.api;\n\npublic interface Paiement {\n    String nom();\n}",
+            "paiement.carte/module-info.java": "module paiement.carte {\n    requires paiement.api;\n    provides com.paiement.api.Paiement with com.paiement.carte.PaiementCarte;\n}",
+            "paiement.carte/com/paiement/carte/PaiementCarte.java": "package com.paiement.carte;\n\nimport com.paiement.api.Paiement;\n\npublic class PaiementCarte implements Paiement {\n    public String nom() { return \"carte\"; }\n}",
+            "paiement.virement/module-info.java": "module paiement.virement {\n    requires paiement.api;\n    provides com.paiement.api.Paiement with com.paiement.virement.PaiementVirement;\n}",
+            "paiement.virement/com/paiement/virement/PaiementVirement.java": "package com.paiement.virement;\n\nimport com.paiement.api.Paiement;\n\npublic class PaiementVirement implements Paiement {\n    public String nom() { return \"virement\"; }\n}",
+            "boutique/module-info.java": "module boutique {\n    requires paiement.api;\n    uses com.paiement.api.Paiement;\n}",
+            "boutique/com/boutique/Main.java": "package com.boutique;\n\nimport com.paiement.api.Paiement;\nimport java.util.ArrayList;\nimport java.util.Collections;\nimport java.util.List;\nimport java.util.ServiceLoader;\n\npublic class Main {\n    public static void main(String[] args) {\n        List<String> noms = new ArrayList<>();\n        for (Paiement p : ServiceLoader.load(Paiement.class)) {\n            noms.add(p.nom());\n        }\n        Collections.sort(noms);\n        System.out.print(\"Moyens trouvés : \" + noms);\n    }\n}"
+          }
+        }
+      }
+    ]
   },
   {
     "id": "modules-compilation",
     "group": "modules",
     "title": "Compiler et créer des JAR modulaires ou non modulaires",
     "rules": [
-      "javac compile les sources en fichiers class. jar assemble une archive. Un JAR modulaire explicite standard porte un module-info.class à sa racine ; un JAR ordinaire n’en porte pas."
+      "javac compile les sources en fichiers class.",
+      "jar assemble une archive.",
+      "Un JAR modulaire explicite standard porte un module-info.class à sa racine ; un JAR ordinaire n’en porte pas."
     ],
     "method": [
       "Distinguer compilation, archivage et exécution.",
@@ -1847,14 +1975,23 @@ export const memos = [
     "group": "modules",
     "title": "Classpath, module path et migration vers les modules",
     "rules": [
-      "Sur le classpath, un JAR ordinaire appartient au module non nommé de son chargeur. Sur le module path, un JAR sans descripteur peut devenir automatique, avec un nom dérivé ou fourni par Automatic-Module-Name."
+      "Sur le classpath, un JAR ordinaire appartient au module non nommé de son chargeur.",
+      "Sur le module path, un JAR sans descripteur peut devenir automatique, avec un nom dérivé ou fourni par Automatic-Module-Name."
     ],
     "method": [
       "Repérer le chemin de chargement de chaque archive.",
       "Distinguer module explicite, automatique et non nommé avant de raisonner sur ses accès."
     ],
-    "code": "System.out.print(String.class.getModule().getName() + \":\" + String.class.getModule().isNamed());",
-    "explanation": "String appartient au module explicite nommé java.base. Les classes d’application lancées sur le classpath appartiennent normalement à un module non nommé.",
+    "exampleTitle": "Le même JAR sur le classpath puis sur le module path",
+    "code": "javac -d classes src/com/texte/Affiche.java\njar --create --file outils-texte-1.2.jar -C classes .\njava -cp outils-texte-1.2.jar com.texte.Affiche\njava --module-path outils-texte-1.2.jar --module outils.texte/com.texte.Affiche",
+    "explanation": "Affiche, dans le package com.texte et sans module-info, indique le module de sa propre classe via Affiche.class.getModule(). Sur le classpath, le JAR appartient au module non nommé : « module non nommé ». Sur le module path, le même JAR devient un module automatique dont le nom est dérivé du nom de fichier : la version -1.2 est retirée et le tiret devient un point, d’où « module automatique outils.texte ».",
+    "additionalExamples": [
+      {
+        "title": "Nommer le module automatique avec le manifeste",
+        "code": "cat > nom.mf <<'EOF'\nAutomatic-Module-Name: com.texte\nEOF\njar --create --file outils-texte-1.2.jar --manifest nom.mf -C classes .\njava --module-path outils-texte-1.2.jar --module com.texte/com.texte.Affiche",
+        "explanation": "nom.mf est un fragment de manifeste : jar le fusionne dans META-INF/MANIFEST.MF. L’attribut Automatic-Module-Name fixe le nom du module automatique ; le nom de fichier n’est alors plus utilisé. On lance donc com.texte/com.texte.Affiche, et non outils.texte/…, ce qui affiche « module automatique com.texte ». Fixer ce nom permet aux autres modules d’écrire requires com.texte sans dépendre du nom du fichier."
+      }
+    ],
     "pitfalls": [
       "Un module automatique exporte ses packages et facilite la migration.",
       "Placer un JAR sur le classpath ne lui donne pas automatiquement un nom de module."
@@ -1868,16 +2005,16 @@ export const memos = [
     "related": [
       "modules-descripteur"
     ],
-    "check": {
-      "output": "java.base:true"
-    }
+    "language": "sh"
   },
   {
     "id": "modules-outils",
     "group": "modules",
     "title": "jdeps et jlink : dépendances et images d’exécution",
     "rules": [
-      "jdeps analyse les dépendances du bytecode. jlink assemble des modules et leurs dépendances dans une image d’exécution personnalisée. Ce sont des outils distincts de javac et jar."
+      "jdeps analyse les dépendances du bytecode.",
+      "jlink assemble des modules et leurs dépendances dans une image d’exécution personnalisée.",
+      "jdeps et jlink sont des outils distincts de javac et jar."
     ],
     "method": [
       "Identifier si l’objectif est analyser, compiler, archiver ou assembler un runtime.",
@@ -1910,7 +2047,9 @@ export const memos = [
     "group": "concurrency",
     "title": "Threads de plateforme : démarrage et cycle de vie",
     "rules": [
-      "start programme une nouvelle exécution concurrente ; un appel direct à run reste dans le thread appelant. Un thread ne peut être démarré qu’une fois. join attend la terminaison de la cible et établit les garanties de visibilité associées."
+      "start programme une nouvelle exécution concurrente ; un appel direct à run reste dans le thread appelant.",
+      "Un thread ne peut être démarré qu’une fois.",
+      "join attend la terminaison de la cible et établit les garanties de visibilité associées."
     ],
     "method": [
       "Identifier quel thread exécute chaque instruction.",
@@ -1941,7 +2080,8 @@ export const memos = [
     "group": "concurrency",
     "title": "Threads virtuels : création et usages",
     "rules": [
-      "Les threads virtuels sont standard en Java 21. Ils permettent une forte concurrence de tâches passant du temps à attendre ; ils n’augmentent pas automatiquement la capacité de calcul CPU."
+      "Les threads virtuels sont standard en Java 21.",
+      "Les threads virtuels permettent une forte concurrence de tâches passant du temps à attendre ; ils n’augmentent pas automatiquement la capacité de calcul CPU."
     ],
     "method": [
       "Déterminer si la charge attend des entrées-sorties ou effectue du calcul.",
@@ -1972,7 +2112,8 @@ export const memos = [
     "group": "concurrency",
     "title": "Runnable, Callable, Future et ExecutorService",
     "rules": [
-      "Runnable.run ne retourne pas de valeur et ne déclare pas d’exception checked. Callable.call peut faire les deux. submit produit un Future ; get attend un résultat et encapsule l’échec de la tâche dans ExecutionException."
+      "Runnable.run ne retourne pas de valeur et ne déclare pas d’exception checked. Callable.call peut faire les deux.",
+      "submit produit un Future ; get attend un résultat et encapsule l’échec de la tâche dans ExecutionException."
     ],
     "method": [
       "Identifier le contrat de la tâche et la manière de récupérer son résultat.",
@@ -2003,11 +2144,16 @@ export const memos = [
     "group": "concurrency",
     "title": "synchronized et verrous explicites",
     "rules": [
-      "Une méthode synchronized d’instance utilise le moniteur de l’instance ; static synchronized utilise l’objet Class déclarant la méthode. Un ReentrantLock nécessite une libération explicite assurée par finally. Il est réentrant : le même thread peut l’acquérir plusieurs fois ; getHoldCount() indique le nombre d’acquisitions encore détenues par le thread courant et chaque acquisition exige un unlock().",
-      "Quand plusieurs threads partagent une donnée modifiable, un verrou permet de protéger les opérations qui doivent rester indivisibles : c’est la section critique. Exemple : vérifier qu’une place est disponible puis la réserver. Tous les accès concurrents concernés doivent respecter le même verrou.",
+      "Une méthode synchronized d’instance utilise le moniteur de l’instance ; static synchronized utilise l’objet Class déclarant la méthode.",
+      "Un ReentrantLock nécessite une libération explicite assurée par finally.",
+      "ReentrantLock est réentrant : le même thread peut l’acquérir plusieurs fois ; getHoldCount() indique le nombre d’acquisitions encore détenues par le thread courant et chaque acquisition exige un unlock().",
+      "Quand plusieurs threads partagent une donnée modifiable, un verrou permet de protéger les opérations qui doivent rester indivisibles : c’est la section critique. Exemple : vérifier qu’une place est disponible puis la réserver.",
+      "Tous les accès concurrents concernés doivent respecter le même verrou.",
       "Sans verrou, deux threads peuvent chacun lire « 1 place disponible », puis chacun confirmer sa réservation : deux réservations pour une seule place. Ce déroulement est possible, mais ne se produit pas forcément à chaque exécution.",
       "Les threads d’un même processus Java partagent des objets. Un ReentrantLock coordonne les threads qui utilisent cette même instance de verrou ; il ne coordonne pas deux programmes Java lancés dans des processus distincts.",
-      "Pour une section critique simple, synchronized suffit et libère automatiquement le moniteur en sortie de bloc. Un verrou explicite permet notamment tryLock() pour essayer sans attendre, ou une acquisition avec délai maximal. Il n’est pas nécessaire de créer un ReentrantLock pour chaque accès à une variable."
+      "Pour une section critique simple, synchronized suffit et libère automatiquement le moniteur en sortie de bloc.",
+      "Un verrou explicite permet notamment tryLock() pour essayer sans attendre, ou une acquisition avec délai maximal.",
+      "Il n’est pas nécessaire de créer un ReentrantLock pour chaque accès à une variable."
     ],
     "method": [
       "Identifier le verrou exact partagé par les tâches.",
@@ -2040,7 +2186,8 @@ export const memos = [
       }
     ],
     "related": [
-      "visibilite"
+      "visibilite",
+      "atomiques"
     ],
     "check": {
       "output": "protégé"
@@ -2060,9 +2207,48 @@ export const memos = [
   {
     "id": "visibilite",
     "group": "concurrency",
-    "title": "Visibilité, volatile et opérations atomiques",
+    "title": "Visibilité et volatile",
     "rules": [
-      "volatile fournit des garanties de visibilité et d’ordre pour un champ, mais ne rend pas une opération composée telle que i++ atomique. Les classes atomiques fournissent des opérations indivisibles dédiées."
+      "volatile fournit des garanties de visibilité et d’ordre pour un champ, mais ne rend pas une opération composée telle que i++ atomique. Les classes atomiques fournissent des opérations indivisibles dédiées.",
+      "volatile est un modificateur de champ.",
+      "Une écriture dans un champ volatile se produit avant (happens-before) toute lecture ultérieure de ce champ : un thread qui le lit voit la dernière valeur écrite par un autre thread. Sans volatile ni synchronisation, rien ne garantit qu’un thread voie un jour la modification faite par un autre."
+    ],
+    "method": [
+      "Si un thread écrit une valeur indépendante, comme un drapeau d’arrêt, et que d’autres la lisent, volatile suffit ; s’il faut lire, calculer puis écrire, il faut une opération atomique ou un verrou.",
+      "Décomposer l’opération en lectures, calculs et écritures.",
+      "Choisir une opération atomique ou un verrou lorsque plusieurs étapes doivent rester inséparables."
+    ],
+    "code": "class Tache implements Runnable {\n    volatile boolean arret;\n    public void run() {\n        while (!arret) { }\n        System.out.print(\"Fin de la boucle. \");\n    }\n}\nvar tache = new Tache();\nvar travailleur = new Thread(tache);\ntravailleur.start();\nThread.sleep(100);\ntache.arret = true;\ntravailleur.join();\nSystem.out.print(\"Vivant : \" + travailleur.isAlive());",
+    "explanation": "Le thread travailleur boucle tant que arret vaut false. Le thread main écrit true dans ce champ volatile ; cette écriture se produit avant la lecture suivante du travailleur, qui sort de la boucle. join attend la fin du travailleur, puis isAlive renvoie false : « Fin de la boucle. Vivant : false ». Sans volatile, le compilateur peut ne lire arret qu’une seule fois et la boucle peut ne jamais se terminer (JLS §17.3).",
+    "pitfalls": [
+      "volatile ne s’applique qu’aux champs : sur une variable locale, il provoque une erreur de compilation.",
+      "Un champ ne peut pas être à la fois final et volatile : la combinaison est refusée à la compilation."
+    ],
+    "sources": [
+      {
+        "title": "JLS 21 — Champs volatile",
+        "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-8.html#jls-8.3.1.4"
+      },
+      {
+        "title": "Modèle mémoire Java SE 21",
+        "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html"
+      }
+    ],
+    "related": [
+      "atomiques",
+      "verrous",
+      "threads"
+    ],
+    "check": {
+      "output": "Fin de la boucle. Vivant : false"
+    }
+  },
+  {
+    "id": "atomiques",
+    "group": "concurrency",
+    "title": "Opérations atomiques",
+    "rules": [
+      "Les classes du package java.util.concurrent.atomic, comme AtomicInteger, fournissent des opérations indivisibles sur une seule variable : incrementAndGet, getAndIncrement ou compareAndSet lisent, calculent et écrivent sans qu’un autre thread puisse s’intercaler."
     ],
     "method": [
       "Décomposer l’opération en lectures, calculs et écritures.",
@@ -2085,6 +2271,7 @@ export const memos = [
       }
     ],
     "related": [
+      "visibilite",
       "verrous",
       "threads"
     ],
@@ -2097,7 +2284,8 @@ export const memos = [
     "group": "concurrency",
     "title": "Collections concurrentes et opérations composées",
     "rules": [
-      "Une collection concurrente fournit des garanties définies par son contrat. ConcurrentHashMap propose des mises à jour atomiques par clé comme compute ; enchaîner get puis put ne forme pas une opération atomique."
+      "Une collection concurrente fournit des garanties définies par son contrat.",
+      "ConcurrentHashMap propose des mises à jour atomiques par clé comme compute ; enchaîner get puis put ne forme pas une opération atomique."
     ],
     "method": [
       "Identifier l’opération logique qui doit être indivisible.",
@@ -2128,7 +2316,9 @@ export const memos = [
     "group": "concurrency",
     "title": "Streams parallèles : ordre, réduction et état partagé",
     "rules": [
-      "Un stream parallèle peut répartir le traitement. Les fonctions doivent être non interférentes et généralement sans état. forEach ne garantit pas l’ordre de rencontre ; forEachOrdered le respecte pour un stream ordonné."
+      "Un stream parallèle peut répartir le traitement.",
+      "Les fonctions passées au stream doivent être non interférentes et généralement sans état.",
+      "forEach ne garantit pas l’ordre de rencontre ; forEachOrdered le respecte pour un stream ordonné."
     ],
     "method": [
       "Repérer les mutations d’un état partagé par plusieurs tâches.",
@@ -2160,7 +2350,9 @@ export const memos = [
     "group": "io",
     "title": "Flux d’octets, flux de caractères et console",
     "rules": [
-      "InputStream et OutputStream transportent des octets ; Reader et Writer transportent des unités de caractères. Les ponts InputStreamReader et OutputStreamWriter utilisent un charset. read renvoie -1 pour la fin normale d’un flux simple."
+      "InputStream et OutputStream transportent des octets ; Reader et Writer transportent des unités de caractères.",
+      "Les ponts InputStreamReader et OutputStreamWriter utilisent un charset.",
+      "read renvoie -1 pour la fin normale d’un flux simple."
     ],
     "method": [
       "Identifier si les données sont binaires ou textuelles.",
@@ -2190,7 +2382,8 @@ export const memos = [
     "group": "io",
     "title": "Lire, écrire et fermer les ressources",
     "rules": [
-      "Une ressource de fichier doit être fermée selon son contrat. Files.lines retourne un Stream qui garde le fichier ouvert ; une opération terminale ne le ferme pas automatiquement."
+      "Une ressource de fichier doit être fermée selon son contrat.",
+      "Files.lines retourne un Stream qui garde le fichier ouvert ; une opération terminale ne le ferme pas automatiquement."
     ],
     "method": [
       "Identifier le propriétaire de la ressource ouverte.",
@@ -2221,7 +2414,9 @@ export const memos = [
     "group": "io",
     "title": "Sérialisation et désérialisation",
     "rules": [
-      "La sérialisation par défaut d’une classe ordinaire Serializable inclut son état d’instance non transient. Les champs static n’en font pas partie. Les objets référencés dans le graphe doivent être sérialisables, sauf exclusion ou personnalisation appropriée."
+      "La sérialisation par défaut d’une classe ordinaire Serializable inclut son état d’instance non transient.",
+      "Les champs static sont exclus de la sérialisation par défaut.",
+      "Les objets référencés dans le graphe doivent être sérialisables, sauf exclusion ou personnalisation appropriée."
     ],
     "method": [
       "Parcourir le graphe des champs d’instance concernés.",
@@ -2251,7 +2446,8 @@ export const memos = [
     "group": "io",
     "title": "Path : construction, résolution et normalisation",
     "rules": [
-      "Path représente un chemin sans créer ni ouvrir un fichier. normalize simplifie lexicalement les segments ; toAbsolutePath rend absolu sans imposer l’existence ; toRealPath consulte le système de fichiers et résout normalement les liens."
+      "Path représente un chemin sans créer ni ouvrir un fichier.",
+      "normalize simplifie lexicalement les segments ; toAbsolutePath rend absolu sans imposer l’existence ; toRealPath consulte le système de fichiers et résout normalement les liens."
     ],
     "method": [
       "Distinguer opérations lexicales et opérations nécessitant un accès disque.",
@@ -2281,7 +2477,9 @@ export const memos = [
     "group": "io",
     "title": "Files : parcours, attributs et opérations sur les fichiers",
     "rules": [
-      "Files réalise les opérations réelles : création, lecture, copie, déplacement et parcours. Les streams de list, walk ou find doivent être fermés. Un remplacement ou une atomicité de déplacement dépend des options et du système de fichiers."
+      "Files réalise les opérations réelles : création, lecture, copie, déplacement et parcours.",
+      "Les streams de list, walk ou find doivent être fermés.",
+      "Un remplacement ou une atomicité de déplacement dépend des options et du système de fichiers."
     ],
     "method": [
       "Identifier l’état initial : existence, type et droits du chemin.",
@@ -2312,7 +2510,8 @@ export const memos = [
     "group": "locale",
     "title": "Locale : langues, régions et paramètres par défaut",
     "rules": [
-      "Locale décrit des conventions linguistiques et régionales, pas une traduction automatique. forLanguageTag utilise une balise comme fr-BE ; getLanguage et getCountry extraient des composants distincts."
+      "Locale décrit des conventions linguistiques et régionales, pas une traduction automatique.",
+      "forLanguageTag utilise une balise comme fr-BE ; getLanguage et getCountry extraient des composants distincts."
     ],
     "method": [
       "Distinguer langue, région et représentation complète de la balise.",
@@ -2343,7 +2542,9 @@ export const memos = [
     "group": "locale",
     "title": "ResourceBundle : recherche des traductions et repli",
     "rules": [
-      "ResourceBundle charge une famille de ressources selon un nom de base et une locale. Les candidats standards vont du plus spécifique vers des variantes moins spécifiques ; la locale par défaut peut aussi intervenir. Une clé absente de toute la chaîne de parents provoque MissingResourceException."
+      "ResourceBundle charge une famille de ressources selon un nom de base et une locale.",
+      "Les candidats standards vont du plus spécifique vers des variantes moins spécifiques ; la locale par défaut peut aussi intervenir.",
+      "Une clé absente de toute la chaîne de parents provoque MissingResourceException."
     ],
     "method": [
       "Lister les variantes disponibles et la locale demandée.",
@@ -2374,8 +2575,11 @@ export const memos = [
     "group": "locale",
     "title": "Nombres, devises et pourcentages : formatage et parsing",
     "rules": [
-      "NumberFormat applique les conventions d’une locale. Le format pourcentage affiche une fraction multipliée par 100. Un format monétaire présente une valeur dans une devise, sans calculer un taux de change.",
-      "Le format pourcentage standard de Locale.US n’affiche par défaut aucune décimale. L’affichage est donc arrondi selon les paramètres du format ; NumberFormat utilise par défaut RoundingMode.HALF_EVEN pour les arrondis : à égalité exacte, le dernier chiffre conservé est pair. Les bornes de décimales se consultent avec getMinimumFractionDigits() et getMaximumFractionDigits() et peuvent être configurées."
+      "NumberFormat applique les conventions d’une locale.",
+      "Le format pourcentage affiche une fraction multipliée par 100.",
+      "Un format monétaire présente une valeur dans une devise, sans calculer un taux de change.",
+      "Le format pourcentage standard de Locale.US n’affiche par défaut aucune décimale. L’affichage est donc arrondi selon les paramètres du format ; NumberFormat utilise par défaut RoundingMode.HALF_EVEN pour les arrondis : à égalité exacte, le dernier chiffre conservé est pair.",
+      "Les bornes de décimales se consultent avec getMinimumFractionDigits() et getMaximumFractionDigits() et peuvent être configurées."
     ],
     "method": [
       "Identifier la locale et le type de format demandé.",
@@ -2407,8 +2611,10 @@ export const memos = [
     "group": "locale",
     "title": "DateTimeFormatter : motifs, formatage et parsing",
     "rules": [
-      "DateTimeFormatter est immuable et thread-safe. Les lettres de motifs sont sensibles à la casse : u pour l’année proleptique, M pour le mois, d pour le jour du mois ; m désigne les minutes et Y l’année basée sur les semaines.",
-      "Le formatter passé à LocalDate.parse sert à interpréter le texte, pas à fixer son affichage ultérieur. Un LocalDate représente une date et ne conserve pas le motif du texte d’entrée. Son affichage direct passe par toString(), au format ISO uuuu-MM-dd. Pour choisir le format de sortie, appeler explicitement date.format(formatter)."
+      "DateTimeFormatter est immuable et thread-safe.",
+      "Les lettres de motifs sont sensibles à la casse : u pour l’année proleptique, M pour le mois, d pour le jour du mois ; m désigne les minutes et Y l’année basée sur les semaines.",
+      "Le formatter passé à LocalDate.parse sert à interpréter le texte, pas à fixer son affichage ultérieur. Un LocalDate représente une date et ne conserve pas le motif du texte d’entrée.",
+      "L’affichage direct d’un LocalDate passe par toString(), au format ISO uuuu-MM-dd. Pour choisir le format de sortie, appeler explicitement date.format(formatter)."
     ],
     "method": [
       "Vérifier que chaque champ du motif existe dans le type temporel utilisé.",
@@ -2449,7 +2655,8 @@ export const memos = [
     "group": "locale",
     "title": "Messages localisés avec MessageFormat",
     "rules": [
-      "MessageFormat insère des arguments numérotés dans un modèle de message. La locale sert aux sous-formats numériques et temporels ; les traductions du texte doivent être fournies, par exemple par ResourceBundle."
+      "MessageFormat insère des arguments numérotés dans un modèle de message.",
+      "La locale sert aux sous-formats numériques et temporels ; les traductions du texte doivent être fournies, par exemple par ResourceBundle."
     ],
     "method": [
       "Associer chaque indice d’argument à sa valeur.",
@@ -2507,7 +2714,9 @@ export const memos = [
       ]
     },
     "rules": [
-      "List<Integer> n’est pas un sous-type de List<Number>. Avec ? extends Number, la lecture garantit Number, mais pas l’ajout d’un nombre arbitraire. Avec ? super Integer, on peut ajouter Integer, mais une lecture ne garantit que Object."
+      "List<Integer> n’est pas un sous-type de List<Number>.",
+      "Avec ? extends Number, la lecture garantit Number, mais pas l’ajout d’un nombre arbitraire.",
+      "Avec ? super Integer, on peut ajouter Integer, mais une lecture ne garantit que Object."
     ],
     "method": [
       "Identifier la borne et le type exact potentiellement caché par le wildcard.",
@@ -2539,7 +2748,8 @@ export const memos = [
     "group": "extra",
     "title": "Annotations : Override, FunctionalInterface, Deprecated, SuppressWarnings et SafeVarargs",
     "rules": [
-      "Override vérifie une redéfinition ; FunctionalInterface vérifie un contrat fonctionnel ; Deprecated signale un usage déconseillé ; SuppressWarnings masque des avertissements ciblés. SafeVarargs atteste un usage sûr d’un varargs de type non réifiable, sans changer le comportement à l’exécution."
+      "Override vérifie une redéfinition ; FunctionalInterface vérifie un contrat fonctionnel ; Deprecated signale un usage déconseillé ; SuppressWarnings masque des avertissements ciblés.",
+      "SafeVarargs atteste un usage sûr d’un varargs de type non réifiable, sans changer le comportement à l’exécution."
     ],
     "method": [
       "Identifier l’élément annoté et la vérification ou information apportée.",
@@ -2587,7 +2797,9 @@ export const memos = [
     "group": "extra",
     "title": "Java Logging API : loggers, niveaux, handlers et messages",
     "rules": [
-      "java.util.logging appartient au module java.logging. Les niveaux du logger puis des handlers participent au filtrage. Les surcharges avec Supplier peuvent différer la construction du message jusqu’à l’acceptation du niveau par le logger."
+      "java.util.logging appartient au module java.logging.",
+      "Les niveaux du logger puis des handlers participent au filtrage.",
+      "Les surcharges avec Supplier peuvent différer la construction du message jusqu’à l’acceptation du niveau par le logger."
     ],
     "method": [
       "Identifier les niveaux effectifs du logger et des handlers.",
@@ -2739,7 +2951,7 @@ export const questionMemoIds = {
   "concurrency-06": "executeurs",
   "concurrency-07": "verrous",
   "concurrency-08": "visibilite",
-  "concurrency-09": "visibilite",
+  "concurrency-09": "atomiques",
   "concurrency-10": "verrous",
   "concurrency-11": "maps-concurrentes",
   "concurrency-12": "maps-concurrentes",
