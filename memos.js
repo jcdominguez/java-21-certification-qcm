@@ -1574,7 +1574,9 @@ export const memos = [
     "rules": [
       "iterate et generate peuvent produire des streams infinis.",
       "limit borne le nombre d’éléments.",
-      "Sur un stream ordonné, takeWhile garde le préfixe accepté et dropWhile retire ce préfixe."
+      "Sur un stream ordonné, takeWhile garde le préfixe accepté et dropWhile retire ce préfixe.",
+      "dropWhile saute les éléments du début tant que le prédicat renvoie true. Dès le premier false, cet élément et tous les suivants sont conservés.",
+      "Dans default Stream<T> dropWhile(Predicate<? super T> predicate), default indique que l’interface fournit une implémentation et Stream<T> que le résultat garde le même type d’élément. Le prédicat renvoie un booléen et peut être défini sur T ou sur un supertype de T. Par exemple, un Stream<Integer> accepte un Predicate<Number>."
     ],
     "method": [
       "Identifier si la source est finie.",
@@ -1582,6 +1584,16 @@ export const memos = [
     ],
     "code": "System.out.print(Stream.iterate(2, n -> n + 2)\n    .limit(5).takeWhile(n -> n < 7).toList());",
     "explanation": "La source limitée vaut 2, 4, 6, 8, 10 ; takeWhile s’arrête avant 8.",
+    "additionalExamples": [
+      {
+        "title": "takeWhile et dropWhile sur les mêmes valeurs",
+        "code": "System.out.println(Stream.of(1, 2, 5, 1, 3).takeWhile(n -> n < 5).toList());\nSystem.out.println(Stream.of(1, 2, 5, 1, 3).dropWhile(n -> n < 5).toList());",
+        "explanation": "Le premier false arrive à 5. takeWhile conserve les éléments avant ce point et donne [1, 2]. dropWhile conserve 5 et toute la suite, ce qui donne [5, 1, 3]. Le deuxième 1 et le 3 restent dans le résultat même si la condition est vraie pour eux.",
+        "check": {
+          "output": "[1, 2]\n[5, 1, 3]\n"
+        }
+      }
+    ],
     "pitfalls": [
       "filter et takeWhile ont des contrats différents.",
       "Une terminale qui exige toutes les valeurs peut ne jamais finir sur une source infinie."
@@ -1593,7 +1605,8 @@ export const memos = [
       }
     ],
     "related": [
-      "pipeline"
+      "pipeline",
+      "generiques"
     ],
     "check": {
       "output": "[2, 4, 6]"
