@@ -65,7 +65,8 @@ export const memos = [
     "title": "Types primitifs, wrappers, boxing et unboxing",
     "rules": [
       "Un primitif contient une valeur ; son wrapper est un objet et peut être null.",
-      "Le boxing transforme une valeur primitive en wrapper, et l’unboxing effectue le chemin inverse."
+      "Le boxing transforme une valeur primitive en wrapper, et l’unboxing effectue le chemin inverse.",
+      "La méthode equals d’un wrapper numérique exige aussi le même type de wrapper : des valeurs numériques égales portées par Integer et Long ne sont pas égales pour Integer.equals."
     ],
     "method": [
       "Identifier le type déclaré et la présence éventuelle de null.",
@@ -161,7 +162,8 @@ export const memos = [
     "title": "Math : calculs, arrondis et limites numériques",
     "rules": [
       "floor arrondit vers moins l’infini, ceil vers plus l’infini.",
-      "round choisit l’entier le plus proche avec les égalités vers plus l’infini ; son type de retour dépend de la surcharge."
+      "round choisit l’entier le plus proche avec les égalités vers plus l’infini ; son type de retour dépend de la surcharge.",
+      "Math.floorDiv sur deux entiers arrondit le quotient vers moins l’infini ; l’opérateur / entre entiers tronque vers zéro. Les résultats peuvent donc différer si le quotient est négatif et non entier."
     ],
     "method": [
       "Vérifier si l’argument est float ou double.",
@@ -254,7 +256,8 @@ export const memos = [
     "title": "Text blocks et séquences d’échappement",
     "rules": [
       "Un text block est un littéral String multiligne.",
-      "Le délimiteur ouvrant est suivi d’un saut de ligne ; l’indentation incidente est retirée et les échappements sont interprétés."
+      "Le délimiteur ouvrant est suivi d’un saut de ligne ; l’indentation incidente est retirée et les échappements sont interprétés.",
+      "String.lines() parcourt les lignes séparées par des terminateurs. Un terminateur final ne crée pas à lui seul une ligne vide supplémentaire à la fin du stream."
     ],
     "method": [
       "Repérer la position du délimiteur fermant pour déterminer l’indentation et le saut de ligne final.",
@@ -270,6 +273,10 @@ export const memos = [
       {
         "title": "Spécification du langage Java SE 21",
         "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-3.html"
+      },
+      {
+        "title": "String.lines : terminateurs de ligne et fin de chaîne",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/String.html#lines()"
       }
     ],
     "related": [
@@ -286,7 +293,8 @@ export const memos = [
     "rules": [
       "LocalDate représente une date, LocalTime une heure, LocalDateTime leur combinaison sans fuseau.",
       "Instant représente un point sur la ligne du temps.",
-      "LocalDate, LocalTime, LocalDateTime et Instant sont immuables."
+      "LocalDate, LocalTime, LocalDateTime et Instant sont immuables.",
+      "LocalTime.plusMinutes et plusHours rebouclent sur une journée de 24 heures sans conserver un changement de date. Par exemple, dépasser minuit fournit une heure du début de journée."
     ],
     "method": [
       "Choisir le type selon la présence d’une date, d’une heure et d’un fuseau.",
@@ -1063,7 +1071,8 @@ export const memos = [
     "rules": [
       "Les sous-types de RuntimeException et Error sont unchecked.",
       "Les autres exceptions checked doivent être interceptées ou déclarées.",
-      "Une exception personnalisée choisit son contrat en étendant la classe appropriée."
+      "Une exception personnalisée choisit son contrat en étendant la classe appropriée.",
+      "Une exception peut conserver une cause fournie au constructeur ; getCause() retrouve cette exception, distincte du message de l’exception englobante et des exceptions supprimées de try-with-resources."
     ],
     "method": [
       "Examiner la hiérarchie du type levé.",
@@ -1096,7 +1105,8 @@ export const memos = [
     "rules": [
       "Les catch sont examinés dans l’ordre ; un type spécifique doit précéder un supertype qui le couvre.",
       "Les alternatives d’un multi-catch ne peuvent pas être en relation de sous-typage.",
-      "finally intervient à la sortie du try/catch selon les règles du langage."
+      "finally intervient à la sortie du try/catch selon les règles du langage.",
+      "Le paramètre d’un catch à plusieurs alternatives est implicitement final : il ne peut pas être réaffecté dans le corps du multi-catch."
     ],
     "method": [
       "Trouver le premier catch compatible avec l’exception.",
@@ -1323,7 +1333,8 @@ export const memos = [
     "rules": [
       "Une Map associe au plus une valeur à chaque clé.",
       "put remplace la valeur associée.",
-      "merge combine une valeur présente non null avec la valeur fournie ; compute calcule une association à partir de la clé et de sa valeur actuelle."
+      "merge combine une valeur présente non null avec la valeur fournie ; compute calcule une association à partir de la clé et de sa valeur actuelle.",
+      "Pour une clé associée à une valeur non nulle, merge appelle la fonction de combinaison. Si cette fonction renvoie null, l’association est supprimée."
     ],
     "method": [
       "Suivre l’état de chaque clé après chaque opération.",
@@ -1355,7 +1366,8 @@ export const memos = [
     "rules": [
       "Deque permet l’accès aux deux extrémités.",
       "push/pop travaillent en tête selon une pile LIFO.",
-      "Les variantes poll et peek renvoient null à vide, alors que remove et get lèvent une exception."
+      "Les variantes poll et peek renvoient null à vide, alors que remove et get lèvent une exception.",
+      "Utilisée comme file FIFO, une Deque reçoit les éléments en queue avec offer (offerLast) et les retire en tête avec remove (removeFirst)."
     ],
     "method": [
       "Dessiner la tête et la queue après chaque ajout.",
@@ -1416,7 +1428,8 @@ export const memos = [
     "title": "Collections séquencées et vues inversées",
     "rules": [
       "Java 21 fournit les interfaces de collections séquencées pour les collections à ordre de rencontre défini.",
-      "reversed produit une vue dans l’ordre inverse, et non une copie indépendante."
+      "reversed produit une vue dans l’ordre inverse, et non une copie indépendante.",
+      "Dans un LinkedHashSet, addFirst et addLast repositionnent un élément déjà présent sans le dupliquer ; l’ordre de rencontre peut donc changer sans que la taille change."
     ],
     "method": [
       "Repérer le premier et le dernier élément dans les deux vues.",
@@ -1432,6 +1445,10 @@ export const memos = [
       {
         "title": "Documentation officielle Java SE 21",
         "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/SequencedCollection.html"
+      },
+      {
+        "title": "LinkedHashSet : opérations séquencées",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/LinkedHashSet.html"
       }
     ],
     "related": [
@@ -1447,7 +1464,8 @@ export const memos = [
     "title": "Lambdas, références de méthodes et interfaces fonctionnelles",
     "rules": [
       "Une lambda ou une référence de méthode est typée par une interface fonctionnelle cible.",
-      "Predicate teste, Function transforme, Consumer consomme et Supplier fournit sans argument."
+      "Predicate teste, Function transforme, Consumer consomme et Supplier fournit sans argument.",
+      "Avec une référence non liée Type::methodeInstance, le premier paramètre de l’interface fonctionnelle fournit le receveur ; les paramètres suivants deviennent ceux de la méthode appelée."
     ],
     "method": [
       "Écrire la signature attendue : paramètres et type de retour.",
@@ -1511,7 +1529,8 @@ export const memos = [
     "title": "Créer des streams objets et primitifs",
     "rules": [
       "Stream<T> manipule des références.",
-      "IntStream, LongStream et DoubleStream fournissent des opérations spécialisées ; range exclut sa borne finale et rangeClosed l’inclut."
+      "IntStream, LongStream et DoubleStream fournissent des opérations spécialisées ; range exclut sa borne finale et rangeClosed l’inclut.",
+      "average() sur un IntStream renvoie un OptionalDouble : il contient la moyenne si le stream a des éléments, sinon il est vide."
     ],
     "method": [
       "Déterminer le type de stream créé par la source.",
@@ -1887,7 +1906,8 @@ export const memos = [
     "rules": [
       "exports expose les types publics d’un package aux modules lecteurs.",
       "opens autorise l’accès réflexif profond au package, sans remplacer l’export nécessaire aux accès ordinaires dans le code source.",
-      "exports et opens peuvent tous deux être qualifiés avec to."
+      "exports et opens peuvent tous deux être qualifiés avec to.",
+      "open module ouvre tous les packages du module à la réflexion profonde. Il ne les exporte pas pour les accès ordinaires dans le code source."
     ],
     "method": [
       "Vérifier d’abord la lisibilité, puis l’export pour un accès source.",
@@ -1989,7 +2009,8 @@ export const memos = [
     "rules": [
       "javac compile les sources en fichiers class.",
       "jar assemble une archive.",
-      "Un JAR modulaire explicite standard porte un module-info.class à sa racine ; un JAR ordinaire n’en porte pas."
+      "Un JAR modulaire explicite standard porte un module-info.class à sa racine ; un JAR ordinaire n’en porte pas.",
+      "javac --release 21 sélectionne les règles du langage, le format de classe et les API de la version 21 ; -d out place les classes dans out. Avec jar, -C classes . ajoute le contenu du dossier classes à la racine de l’archive."
     ],
     "method": [
       "Distinguer compilation, archivage et exécution.",
@@ -2005,6 +2026,10 @@ export const memos = [
       {
         "title": "Documentation officielle Java SE 21",
         "url": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/jar.html"
+      },
+      {
+        "title": "Commande javac — JDK 21",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/specs/man/javac.html"
       }
     ],
     "related": [
@@ -2018,7 +2043,8 @@ export const memos = [
     "title": "Classpath, module path et migration vers les modules",
     "rules": [
       "Sur le classpath, un JAR ordinaire appartient au module non nommé de son chargeur.",
-      "Sur le module path, un JAR sans descripteur peut devenir automatique, avec un nom dérivé ou fourni par Automatic-Module-Name."
+      "Sur le module path, un JAR sans descripteur devient toujours un module automatique, avec un nom dérivé ou fourni par Automatic-Module-Name.",
+      "Si aucun nom de module valide ne peut être obtenu pour ce JAR, Java ne le range pas dans le module non nommé : la recherche du module échoue avec une FindException."
     ],
     "method": [
       "Repérer le chemin de chargement de chaque archive.",
@@ -2036,7 +2062,9 @@ export const memos = [
     ],
     "pitfalls": [
       "Un module automatique exporte ses packages et facilite la migration.",
-      "Placer un JAR sur le classpath ne lui donne pas automatiquement un nom de module."
+      "Placer un JAR sur le classpath ne lui donne pas automatiquement un nom de module.",
+      "Le descripteur d’un module automatique n’est pas écrit par javac ni ajouté dans le JAR : le système de modules le déduit au chargement, à partir du nom de fichier, du manifeste et des packages présents.",
+      "Un JAR ne devient pas une image d’exécution : seul jlink en produit une, et jlink refuse les modules automatiques."
     ],
     "sources": [
       {
@@ -2045,7 +2073,8 @@ export const memos = [
       }
     ],
     "related": [
-      "modules-descripteur"
+      "modules-descripteur",
+      "modules-outils"
     ],
     "language": "sh"
   },
@@ -2123,7 +2152,8 @@ export const memos = [
     "title": "Threads virtuels : création et usages",
     "rules": [
       "Les threads virtuels sont standard en Java 21.",
-      "Les threads virtuels permettent une forte concurrence de tâches passant du temps à attendre ; ils n’augmentent pas automatiquement la capacité de calcul CPU."
+      "Les threads virtuels permettent une forte concurrence de tâches passant du temps à attendre ; ils n’augmentent pas automatiquement la capacité de calcul CPU.",
+      "Un thread virtuel est toujours daemon ; isDaemon() renvoie true, même avant son démarrage. Il faut attendre explicitement une tâche si sa fin est nécessaire avant la fin du programme."
     ],
     "method": [
       "Déterminer si la charge attend des entrées-sorties ou effectue du calcul.",
@@ -2155,7 +2185,8 @@ export const memos = [
     "title": "Runnable, Callable, Future et ExecutorService",
     "rules": [
       "Runnable.run ne retourne pas de valeur et ne déclare pas d’exception checked. Callable.call peut faire les deux.",
-      "submit produit un Future ; get attend un résultat et encapsule l’échec de la tâche dans ExecutionException."
+      "submit produit un Future ; get attend un résultat et encapsule l’échec de la tâche dans ExecutionException.",
+      "Après une annulation réussie, un Future est à la fois cancelled et done : isDone() ne signifie pas nécessairement que la tâche a terminé normalement. Une FutureTask non démarrée peut être annulée sans exécuter son Callable."
     ],
     "method": [
       "Identifier le contrat de la tâche et la manière de récupérer son résultat.",
@@ -2171,6 +2202,10 @@ export const memos = [
       {
         "title": "Documentation officielle Java SE 21",
         "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/ExecutorService.html"
+      },
+      {
+        "title": "Future : annulation et état de terminaison",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/concurrent/Future.html"
       }
     ],
     "related": [
@@ -2195,7 +2230,8 @@ export const memos = [
       "Les threads d’un même processus Java partagent des objets. Un ReentrantLock coordonne les threads qui utilisent cette même instance de verrou ; il ne coordonne pas deux programmes Java lancés dans des processus distincts.",
       "Pour une section critique simple, synchronized suffit et libère automatiquement le moniteur en sortie de bloc.",
       "Un verrou explicite permet notamment tryLock() pour essayer sans attendre, ou une acquisition avec délai maximal.",
-      "Il n’est pas nécessaire de créer un ReentrantLock pour chaque accès à une variable."
+      "Il n’est pas nécessaire de créer un ReentrantLock pour chaque accès à une variable.",
+      "Object.wait(...) exige que le thread courant possède le moniteur de cet objet, par exemple dans synchronized(objet). Sinon il lève IllegalMonitorStateException. Acquérir un ReentrantLock ne revient pas à posséder le moniteur Java de l’objet ; wait doit aussi gérer InterruptedException."
     ],
     "method": [
       "Identifier le verrou exact partagé par les tâches.",
@@ -2225,6 +2261,10 @@ export const memos = [
       {
         "title": "JLS 21 — Instructions synchronized",
         "url": "https://docs.oracle.com/javase/specs/jls/se21/html/jls-14.html#jls-14.19"
+      },
+      {
+        "title": "Object.wait : possession du moniteur",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/lang/Object.html#wait(long)"
       }
     ],
     "related": [
@@ -2394,7 +2434,8 @@ export const memos = [
     "rules": [
       "InputStream et OutputStream transportent des octets ; Reader et Writer transportent des unités de caractères.",
       "Les ponts InputStreamReader et OutputStreamWriter utilisent un charset.",
-      "read renvoie -1 pour la fin normale d’un flux simple."
+      "read renvoie -1 pour la fin normale d’un flux simple.",
+      "System.console() peut être null : vérifier sa disponibilité avant d’appeler ses méthodes. Console.readLine() renvoie une String ou null en fin d’entrée ; readPassword() renvoie un char[] ou null en fin d’entrée."
     ],
     "method": [
       "Identifier si les données sont binaires ou textuelles.",
@@ -2410,6 +2451,10 @@ export const memos = [
       {
         "title": "Documentation officielle Java SE 21",
         "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Reader.html"
+      },
+      {
+        "title": "Console : lecture de lignes et de mots de passe",
+        "url": "https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/io/Console.html"
       }
     ],
     "related": [
@@ -2425,7 +2470,8 @@ export const memos = [
     "title": "Lire, écrire et fermer les ressources",
     "rules": [
       "Une ressource de fichier doit être fermée selon son contrat.",
-      "Files.lines retourne un Stream qui garde le fichier ouvert ; une opération terminale ne le ferme pas automatiquement."
+      "Files.lines retourne un Stream qui garde le fichier ouvert ; une opération terminale ne le ferme pas automatiquement.",
+      "Files.writeString sans option particulière crée le fichier si nécessaire ou tronque son contenu existant avant d’écrire ; APPEND est une option explicite pour ajouter à la fin. Les méthodes writeString et readString gèrent elles-mêmes l’ouverture et la fermeture."
     ],
     "method": [
       "Identifier le propriétaire de la ressource ouverte.",
@@ -2458,7 +2504,8 @@ export const memos = [
     "rules": [
       "La sérialisation par défaut d’une classe ordinaire Serializable inclut son état d’instance non transient.",
       "Les champs static sont exclus de la sérialisation par défaut.",
-      "Les objets référencés dans le graphe doivent être sérialisables, sauf exclusion ou personnalisation appropriée."
+      "Les objets référencés dans le graphe doivent être sérialisables, sauf exclusion ou personnalisation appropriée.",
+      "À la désérialisation standard d’une classe ordinaire Serializable, les initialiseurs de ses champs ne sont pas réexécutés. Un champ transient non restauré par un mécanisme personnalisé garde sa valeur par défaut, par exemple 0 pour int."
     ],
     "method": [
       "Parcourir le graphe des champs d’instance concernés.",

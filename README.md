@@ -1,6 +1,6 @@
 # Atelier certification · Java SE 21
 
-Application statique en français de préparation à la certification **1Z0-830**, avec **200 questions originales** et références officielles Java 21.
+Application statique en français de préparation à la certification **1Z0-830**, avec **250 questions originales** et références officielles Java 21.
 
 - Entraînement par thème, séries de 10, 20 ou 50 questions (limitées aux questions non traitées disponibles), corrigé immédiat et révision volontaire des erreurs. Une question devient traitée après validation ou remise d’une réponse en fin de session ; une simple consultation ne suffit pas.
 - Examen blanc : 50 questions distinctes, 120 minutes, 34 réponses entièrement exactes pour atteindre 68 %. Priorité aux questions non traitées dans chaque thème ; si un quota ne peut être rempli, confirmation du nombre de questions déjà traitées avant le lancement. Répartition pédagogique entre tous les thèmes, sans prétendre reproduire les pondérations Oracle.

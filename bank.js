@@ -11,7 +11,7 @@ function q(topic,prompt,code,items,ref,check=null){
  let options=items.map((s,i)=>{const [text,...rest]=s.replace(/^\+/, '').split(' ~ ');return {id:String(i),text,explanation:rest.join(' ~ '),correct:s.startsWith('+')};});
  const shift=questions.length%options.length; options=[...options.slice(shift),...options.slice(0,shift)];
  const tools={ 'modules-12':'https://docs.oracle.com/en/java/javase/21/docs/specs/man/jlink.html', 'modules-13':'https://docs.oracle.com/en/java/javase/21/docs/specs/man/jdeps.html' };
- questions.push({id,topic,prompt,code,options,memoId:questionMemoIds[id],required:options.filter(o=>o.correct).length,reference:tools[id]||(ref.startsWith('jls:')?JLS+ref.slice(4):API+ref),check});
+ questions.push({id,topic,prompt,code,options,memoId:questionMemoIds[id],required:options.filter(o=>o.correct).length,reference:tools[id]||(ref.startsWith('https://docs.oracle.com/')?ref:ref.startsWith('jls:')?JLS+ref.slice(4):API+ref),check});
 }
 function run(body,output){return {kind:'run',body,output};}
 function fail(body){return {kind:'fail',body};}
